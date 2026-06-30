@@ -1,0 +1,1074 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "tab.home" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Home" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Home" } }
+      }
+    },
+    "tab.calendar" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Calendar" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Calendario" } }
+      }
+    },
+    "tab.plans" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Plans" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Piani" } }
+      }
+    },
+    "tab.stats" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Stats" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Statistiche" } }
+      }
+    },
+    "tab.profile" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Profile" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Profilo" } }
+      }
+    },
+    "greeting.morning" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Good morning," } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Buongiorno," } }
+      }
+    },
+    "greeting.afternoon" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Good afternoon," } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Buon pomeriggio," } }
+      }
+    },
+    "greeting.evening" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Good evening," } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Buonasera," } }
+      }
+    },
+    "login.subtitle" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Track your progress, crush your goals" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Traccia i progressi, raggiungi i tuoi obiettivi" } }
+      }
+    },
+    "login.no_account" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Don't have an account? Sign up" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Non hai un account? Registrati" } }
+      }
+    },
+    "register.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create Account" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Crea Account" } }
+      }
+    },
+    "register.trial_note" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You get %lld days free trial." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Hai %lld giorni di prova gratuita." } }
+      }
+    },
+    "role.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "I am a..." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Sono un..." } }
+      }
+    },
+    "role.subtitle" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Choose your role to personalize your experience" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Scegli il tuo ruolo per personalizzare l'esperienza" } }
+      }
+    },
+    "role.athlete" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Athlete" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Atleta" } }
+      }
+    },
+    "role.pt" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Personal Trainer" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Personal Trainer" } }
+      }
+    },
+    "role.admin" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Admin" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Admin" } }
+      }
+    },
+    "role.athlete.description" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Track your workouts and monitor your progress" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Traccia i tuoi allenamenti e monitora i progressi" } }
+      }
+    },
+    "role.pt.description" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Manage clients and create personalized plans" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Gestisci clienti e crea piani personalizzati" } }
+      }
+    },
+    "field.email" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Email" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Email" } }
+      }
+    },
+    "field.password" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Password" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Password" } }
+      }
+    },
+    "field.confirm_password" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Confirm Password" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Conferma Password" } }
+      }
+    },
+    "field.full_name" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Full Name" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nome Completo" } }
+      }
+    },
+    "button.login" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Log In" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Accedi" } }
+      }
+    },
+    "button.register" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create Account" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Crea Account" } }
+      }
+    },
+    "button.signin_google" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Continue with Google" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Continua con Google" } }
+      }
+    },
+    "button.continue" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Continue" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Continua" } }
+      }
+    },
+    "button.save" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Save" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Salva" } }
+      }
+    },
+    "button.cancel" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Annulla" } }
+      }
+    },
+    "button.delete" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Elimina" } }
+      }
+    },
+    "button.close" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Close" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Chiudi" } }
+      }
+    },
+    "button.done" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Done" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Fatto" } }
+      }
+    },
+    "button.ok" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "OK" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "OK" } }
+      }
+    },
+    "button.add" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Aggiungi" } }
+      }
+    },
+    "button.remove" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Remove" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Rimuovi" } }
+      }
+    },
+    "button.start" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Start" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Inizia" } }
+      }
+    },
+    "button.start_workout" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Start Workout" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Inizia Allenamento" } }
+      }
+    },
+    "button.end_session" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "End Session" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Termina Sessione" } }
+      }
+    },
+    "button.signout" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sign Out" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Esci" } }
+      }
+    },
+    "button.skip" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Skip" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Salta" } }
+      }
+    },
+    "home.weekly_streak" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This Week" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Questa Settimana" } }
+      }
+    },
+    "home.quick_actions" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Quick Actions" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Azioni Rapide" } }
+      }
+    },
+    "home.today_session" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Today's Session" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Sessione di Oggi" } }
+      }
+    },
+    "home.no_session_today" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No session scheduled today.\nTap a day in the calendar to add one." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nessuna sessione per oggi.\nTocca un giorno nel calendario per aggiungerne una." } }
+      }
+    },
+    "home.action.new_session" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Session" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nuova Sessione" } }
+      }
+    },
+    "calendar.view" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "View" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Vista" } }
+      }
+    },
+    "calendar.month" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Month" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Mese" } }
+      }
+    },
+    "calendar.week" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Week" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Settimana" } }
+      }
+    },
+    "calendar.no_upcoming" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No upcoming sessions" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nessuna sessione in programma" } }
+      }
+    },
+    "day.detail.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Day Detail" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Dettaglio Giorno" } }
+      }
+    },
+    "day.no_session" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No sessions scheduled.\nAdd one below." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nessuna sessione pianificata.\nAggiungine una qui sotto." } }
+      }
+    },
+    "day.add_session" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Session" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Aggiungi Sessione" } }
+      }
+    },
+    "day.select_plan" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select a Plan" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Seleziona un Piano" } }
+      }
+    },
+    "day.quick_session" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Quick Free Session" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Sessione Libera" } }
+      }
+    },
+    "plans.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Workout Plans" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Piani di Allenamento" } }
+      }
+    },
+    "plans.empty.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No plans yet" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nessun piano" } }
+      }
+    },
+    "plans.empty.subtitle" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create your first workout plan to get started" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Crea il tuo primo piano di allenamento" } }
+      }
+    },
+    "plans.create_first" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create First Plan" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Crea il Primo Piano" } }
+      }
+    },
+    "plan.new" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Plan" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nuovo Piano" } }
+      }
+    },
+    "plan.edit" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit Plan" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Modifica Piano" } }
+      }
+    },
+    "plan.info" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Plan Info" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Info Piano" } }
+      }
+    },
+    "plan.name" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Plan Name" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nome Piano" } }
+      }
+    },
+    "plan.goal" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Goal" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Obiettivo" } }
+      }
+    },
+    "plan.assign" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Assign to Client" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Assegna a Cliente" } }
+      }
+    },
+    "plan.assign_to" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Assign to" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Assegna a" } }
+      }
+    },
+    "plan.no_assignment" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No assignment" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nessuna assegnazione" } }
+      }
+    },
+    "plan.exercises" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Exercises" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Esercizi" } }
+      }
+    },
+    "plan.add_exercise" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Exercise" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Aggiungi Esercizio" } }
+      }
+    },
+    "plan.sets" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sets" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Serie" } }
+      }
+    },
+    "plan.reps" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reps" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Rip." } }
+      }
+    },
+    "plan.rest" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Rest(s)" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Riposo(s)" } }
+      }
+    },
+    "plan.notes" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notes..." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Note..." } }
+      }
+    },
+    "plan.add_notes" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add notes" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Aggiungi note" } }
+      }
+    },
+    "plan.hide_notes" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Hide notes" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nascondi note" } }
+      }
+    },
+    "goal.strength" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Strength" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Forza" } }
+      }
+    },
+    "goal.hypertrophy" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Hypertrophy" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Ipertrofia" } }
+      }
+    },
+    "goal.endurance" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Endurance" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Resistenza" } }
+      }
+    },
+    "goal.weight_loss" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Weight Loss" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Dimagrimento" } }
+      }
+    },
+    "goal.mixed" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Mixed" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Misto" } }
+      }
+    },
+    "category.all" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "All" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Tutti" } }
+      }
+    },
+    "category.bodyweight" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Bodyweight" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Corpo Libero" } }
+      }
+    },
+    "category.weights" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Weights" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Pesi" } }
+      }
+    },
+    "category.powerlifting" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Powerlifting" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Powerlifting" } }
+      }
+    },
+    "category.crossfit" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "CrossFit" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "CrossFit" } }
+      }
+    },
+    "exercise.library" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Exercise Library" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Libreria Esercizi" } }
+      }
+    },
+    "exercise.search" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search exercises..." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Cerca esercizi..." } }
+      }
+    },
+    "exercise.empty" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No exercises found" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nessun esercizio trovato" } }
+      }
+    },
+    "exercise.custom_badge" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Custom" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Custom" } }
+      }
+    },
+    "exercise.add_custom" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Custom Exercise" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Aggiungi Esercizio Custom" } }
+      }
+    },
+    "exercise.name" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Exercise Name" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nome Esercizio" } }
+      }
+    },
+    "exercise.category" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Category" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Categoria" } }
+      }
+    },
+    "exercise.muscles" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Muscle Groups" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Gruppi Muscolari" } }
+      }
+    },
+    "exercise.muscles_hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Muscles (comma separated)" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Muscoli (separati da virgola)" } }
+      }
+    },
+    "exercise.equipment" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Equipment" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Attrezzatura" } }
+      }
+    },
+    "exercise.pick" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Pick Exercise" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Scegli Esercizio" } }
+      }
+    },
+    "exercise.unknown" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Unknown Exercise" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Esercizio sconosciuto" } }
+      }
+    },
+    "session.completed" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Completed" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Completata" } }
+      }
+    },
+    "session.scheduled" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Scheduled" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Pianificata" } }
+      }
+    },
+    "session.no_notes" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No notes" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nessuna nota" } }
+      }
+    },
+    "session.end_confirm.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "End Session?" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Terminare la sessione?" } }
+      }
+    },
+    "session.end_confirm.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your progress will be saved." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "I tuoi progressi verranno salvati." } }
+      }
+    },
+    "session.rest" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Rest Time" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Riposo" } }
+      }
+    },
+    "session.edit_rest" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit Rest Timer" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Modifica Riposo" } }
+      }
+    },
+    "session.add_set" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Set" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Aggiungi Serie" } }
+      }
+    },
+    "session.reps" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "reps" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "rip." } }
+      }
+    },
+    "session.skip" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Skip Exercise" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Salta Esercizio" } }
+      }
+    },
+    "session.show_notes" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add notes" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Aggiungi note" } }
+      }
+    },
+    "session.hide_notes" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Hide notes" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nascondi note" } }
+      }
+    },
+    "session.exercise_notes" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notes for this exercise..." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Note per questo esercizio..." } }
+      }
+    },
+    "summary.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Session Summary" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Riepilogo Sessione" } }
+      }
+    },
+    "summary.great_job" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Great job!" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Ottimo lavoro!" } }
+      }
+    },
+    "summary.session_complete" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Session complete" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Sessione completata" } }
+      }
+    },
+    "summary.duration" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Duration" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Durata" } }
+      }
+    },
+    "summary.volume" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Volume" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Volume" } }
+      }
+    },
+    "summary.exercises" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Exercises" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Esercizi" } }
+      }
+    },
+    "summary.breakdown" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Details" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Dettagli" } }
+      }
+    },
+    "summary.set %lld" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Set %lld" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Serie %lld" } }
+      }
+    },
+    "summary.back_to_calendar" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Back to Calendar" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Torna al Calendario" } }
+      }
+    },
+    "stats.progression" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Progression" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Progressione" } }
+      }
+    },
+    "stats.consistency" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Consistency" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Costanza" } }
+      }
+    },
+    "stats.month_vs" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Month vs Month" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Mese vs Mese" } }
+      }
+    },
+    "stats.select_exercise" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select an exercise..." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Seleziona un esercizio..." } }
+      }
+    },
+    "stats.period" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Period" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Periodo" } }
+      }
+    },
+    "stats.pick_exercise" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Pick an exercise to see progression" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Scegli un esercizio per vedere la progressione" } }
+      }
+    },
+    "stats.no_data" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No data for this exercise yet" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nessun dato per questo esercizio" } }
+      }
+    },
+    "stats.weekly_sessions" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Weekly Sessions" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Sessioni Settimanali" } }
+      }
+    },
+    "stats.heatmap" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Activity Heatmap" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Heatmap Attività" } }
+      }
+    },
+    "stats.current_streak" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Streak" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Streak" } }
+      }
+    },
+    "stats.longest_streak" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Best Streak" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Miglior Streak" } }
+      }
+    },
+    "stats.total_sessions" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sessions" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Sessioni" } }
+      }
+    },
+    "stats.volume" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Volume" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Volume" } }
+      }
+    },
+    "stats.current_month" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This Month" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Questo Mese" } }
+      }
+    },
+    "stats.prev_month" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Last Month" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Mese Scorso" } }
+      }
+    },
+    "stats.sessions" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sessions" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Sessioni" } }
+      }
+    },
+    "stats.avg_duration" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Avg Duration" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Durata Media" } }
+      }
+    },
+    "stats.top_muscle" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Top Muscle Group" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Muscolo Principale" } }
+      }
+    },
+    "profile.personal" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Personal Info" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Informazioni Personali" } }
+      }
+    },
+    "profile.appearance" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Appearance" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Aspetto" } }
+      }
+    },
+    "profile.theme" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Theme" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Tema" } }
+      }
+    },
+    "profile.language" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Language" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Lingua" } }
+      }
+    },
+    "profile.notifications" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notifications" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Notifiche" } }
+      }
+    },
+    "profile.notif_enabled" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enable Reminders" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Attiva Promemoria" } }
+      }
+    },
+    "profile.reminder_time" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reminder Time" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Orario Promemoria" } }
+      }
+    },
+    "profile.custom_message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Custom message..." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Messaggio personalizzato..." } }
+      }
+    },
+    "profile.subscription" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Subscription" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Abbonamento" } }
+      }
+    },
+    "profile.status" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Status" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Stato" } }
+      }
+    },
+    "profile.trial_days %lld" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%lld days remaining in trial" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "%lld giorni rimanenti nella prova" } }
+      }
+    },
+    "profile.manage_subscription" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Manage Subscription" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Gestisci Abbonamento" } }
+      }
+    },
+    "profile.my_clients" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "My Clients" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "I Miei Clienti" } }
+      }
+    },
+    "profile.signout.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sign Out?" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Esci dall'account?" } }
+      }
+    },
+    "theme.dark" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Dark" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Scuro" } }
+      }
+    },
+    "theme.light" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Light" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Chiaro" } }
+      }
+    },
+    "theme.system" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "System" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Sistema" } }
+      }
+    },
+    "subscription.trial" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Trial" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Prova" } }
+      }
+    },
+    "subscription.active" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Active" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Attivo" } }
+      }
+    },
+    "subscription.expired" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Expired" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Scaduto" } }
+      }
+    },
+    "client.add" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Client" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Aggiungi Cliente" } }
+      }
+    },
+    "client.empty.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No clients yet" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nessun cliente" } }
+      }
+    },
+    "client.empty.subtitle" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add clients using their email address" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Aggiungi clienti usando il loro indirizzo email" } }
+      }
+    },
+    "paywall.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your trial has ended" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "La tua prova è terminata" } }
+      }
+    },
+    "paywall.subtitle" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Subscribe to continue tracking your fitness journey" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Abbonati per continuare a monitorare il tuo percorso" } }
+      }
+    },
+    "paywall.month" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "month" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "mese" } }
+      }
+    },
+    "paywall.cta" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Start Subscription" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Inizia Abbonamento" } }
+      }
+    },
+    "paywall.restore" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Restore Purchase" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Ripristina Acquisto" } }
+      }
+    },
+    "paywall.feature.stats" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Detailed stats & progression charts" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Statistiche dettagliate e grafici" } }
+      }
+    },
+    "paywall.feature.calendar" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Training calendar & scheduling" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Calendario e pianificazione" } }
+      }
+    },
+    "paywall.feature.plans" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Unlimited workout plans" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Piani illimitati" } }
+      }
+    },
+    "paywall.feature.sessions" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Live session tracking" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Tracking sessione in tempo reale" } }
+      }
+    },
+    "notification.default_message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Today is your training day 💪" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Oggi è giorno di allenamento 💪" } }
+      }
+    },
+    "notification.inactivity" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You haven't trained in 5 days. Time to get back! 🔥" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Non ti alleni da 5 giorni. È ora di tornare! 🔥" } }
+      }
+    },
+    "error.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Error" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Errore" } }
+      }
+    },
+    "error.unknown" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "An unexpected error occurred." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Si è verificato un errore inaspettato." } }
+      }
+    },
+    "error.not_authenticated" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "User not authenticated." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Utente non autenticato." } }
+      }
+    },
+    "error.client_not_found" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No user found with this email." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Nessun utente trovato con questa email." } }
+      }
+    },
+    "validation.name_required" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Name is required." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Il nome è obbligatorio." } }
+      }
+    },
+    "validation.email_invalid" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Please enter a valid email." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Inserisci un'email valida." } }
+      }
+    },
+    "validation.password_short" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Password must be at least 6 characters." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "La password deve contenere almeno 6 caratteri." } }
+      }
+    },
+    "validation.password_mismatch" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Passwords do not match." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Le password non coincidono." } }
+      }
+    }
+  },
+  "version" : "1.0"
+}
