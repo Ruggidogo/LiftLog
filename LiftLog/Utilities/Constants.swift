@@ -2,8 +2,8 @@ import Foundation
 
 enum Constants {
     enum Supabase {
-        static let url = "https://YOUR_PROJECT.supabase.co"
-        static let anonKey = "YOUR_ANON_KEY"
+        static let url = "https://zpxwpmmlnhvgihsqjhdd.supabase.co"
+        static let anonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpweHdwbW1sbmh2Z2loc3FqaGRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4NDU5NjQsImV4cCI6MjA5ODQyMTk2NH0.pd_a8xBCVOSu90VuPmT7n0WBQ7aoNyawNsRqBGEBh8A"
     }
 
     enum Stripe {
