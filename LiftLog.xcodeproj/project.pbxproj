@@ -1,0 +1,592 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		000000000000000000000020 = {isa = PBXBuildFile; fileRef = 00000000000000000000001F; };
+		000000000000000000000022 = {isa = PBXBuildFile; fileRef = 000000000000000000000021; };
+		000000000000000000000024 = {isa = PBXBuildFile; fileRef = 000000000000000000000023; };
+		000000000000000000000026 = {isa = PBXBuildFile; fileRef = 000000000000000000000025; };
+		000000000000000000000028 = {isa = PBXBuildFile; fileRef = 000000000000000000000027; };
+		00000000000000000000002A = {isa = PBXBuildFile; fileRef = 000000000000000000000029; };
+		00000000000000000000002C = {isa = PBXBuildFile; fileRef = 00000000000000000000002B; };
+		00000000000000000000002E = {isa = PBXBuildFile; fileRef = 00000000000000000000002D; };
+		000000000000000000000030 = {isa = PBXBuildFile; fileRef = 00000000000000000000002F; };
+		000000000000000000000032 = {isa = PBXBuildFile; fileRef = 000000000000000000000031; };
+		000000000000000000000034 = {isa = PBXBuildFile; fileRef = 000000000000000000000033; };
+		000000000000000000000036 = {isa = PBXBuildFile; fileRef = 000000000000000000000035; };
+		000000000000000000000038 = {isa = PBXBuildFile; fileRef = 000000000000000000000037; };
+		00000000000000000000003A = {isa = PBXBuildFile; fileRef = 000000000000000000000039; };
+		00000000000000000000003C = {isa = PBXBuildFile; fileRef = 00000000000000000000003B; };
+		00000000000000000000003E = {isa = PBXBuildFile; fileRef = 00000000000000000000003D; };
+		000000000000000000000040 = {isa = PBXBuildFile; fileRef = 00000000000000000000003F; };
+		000000000000000000000042 = {isa = PBXBuildFile; fileRef = 000000000000000000000041; };
+		000000000000000000000044 = {isa = PBXBuildFile; fileRef = 000000000000000000000043; };
+		000000000000000000000046 = {isa = PBXBuildFile; fileRef = 000000000000000000000045; };
+		000000000000000000000048 = {isa = PBXBuildFile; fileRef = 000000000000000000000047; };
+		00000000000000000000004A = {isa = PBXBuildFile; fileRef = 000000000000000000000049; };
+		00000000000000000000004C = {isa = PBXBuildFile; fileRef = 00000000000000000000004B; };
+		00000000000000000000004E = {isa = PBXBuildFile; fileRef = 00000000000000000000004D; };
+		000000000000000000000050 = {isa = PBXBuildFile; fileRef = 00000000000000000000004F; };
+		000000000000000000000052 = {isa = PBXBuildFile; fileRef = 000000000000000000000051; };
+		000000000000000000000054 = {isa = PBXBuildFile; fileRef = 000000000000000000000053; };
+		000000000000000000000056 = {isa = PBXBuildFile; fileRef = 000000000000000000000055; };
+		000000000000000000000058 = {isa = PBXBuildFile; fileRef = 000000000000000000000057; };
+		00000000000000000000005A = {isa = PBXBuildFile; fileRef = 000000000000000000000059; };
+		00000000000000000000005C = {isa = PBXBuildFile; fileRef = 00000000000000000000005B; };
+		00000000000000000000005E = {isa = PBXBuildFile; fileRef = 00000000000000000000005D; };
+		000000000000000000000060 = {isa = PBXBuildFile; fileRef = 00000000000000000000005F; };
+		000000000000000000000062 = {isa = PBXBuildFile; fileRef = 000000000000000000000061; };
+		000000000000000000000064 = {isa = PBXBuildFile; fileRef = 000000000000000000000063; };
+		000000000000000000000066 = {isa = PBXBuildFile; fileRef = 000000000000000000000065; };
+		000000000000000000000068 = {isa = PBXBuildFile; fileRef = 000000000000000000000067; };
+		00000000000000000000006A = {isa = PBXBuildFile; fileRef = 000000000000000000000069; };
+		00000000000000000000006C = {isa = PBXBuildFile; fileRef = 00000000000000000000006B; };
+		00000000000000000000006E = {isa = PBXBuildFile; fileRef = 00000000000000000000006D; };
+		000000000000000000000070 = {isa = PBXBuildFile; fileRef = 00000000000000000000006F; };
+		000000000000000000000072 = {isa = PBXBuildFile; fileRef = 000000000000000000000071; };
+		000000000000000000000074 = {isa = PBXBuildFile; fileRef = 000000000000000000000073; };
+		000000000000000000000078 = {isa = PBXBuildFile; productRef = 000000000000000000000077; };
+		00000000000000000000007A = {isa = PBXBuildFile; productRef = 000000000000000000000079; };
+		00000000000000000000007C = {isa = PBXBuildFile; productRef = 00000000000000000000007B; };
+		00000000000000000000007E = {isa = PBXBuildFile; productRef = 00000000000000000000007D; };
+		000000000000000000000080 = {isa = PBXBuildFile; productRef = 00000000000000000000007F; };
+/* End PBXBuildFile section */
+
+
+/* Begin PBXFileReference section */
+		00000000000000000000001E = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = LiftLog/Resources/Info.plist; sourceTree = "<group>"; };
+		00000000000000000000001D = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiftLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		00000000000000000000001F = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LiftLogApp.swift; path = LiftLog/App/LiftLogApp.swift; sourceTree = "<group>"; };
+		000000000000000000000021 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = LiftLog/App/ContentView.swift; sourceTree = "<group>"; };
+		000000000000000000000023 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = User.swift; path = LiftLog/Models/User.swift; sourceTree = "<group>"; };
+		000000000000000000000025 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Exercise.swift; path = LiftLog/Models/Exercise.swift; sourceTree = "<group>"; };
+		000000000000000000000027 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WorkoutPlan.swift; path = LiftLog/Models/WorkoutPlan.swift; sourceTree = "<group>"; };
+		000000000000000000000029 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlanExercise.swift; path = LiftLog/Models/PlanExercise.swift; sourceTree = "<group>"; };
+		00000000000000000000002B = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Session.swift; path = LiftLog/Models/Session.swift; sourceTree = "<group>"; };
+		00000000000000000000002D = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SessionSet.swift; path = LiftLog/Models/SessionSet.swift; sourceTree = "<group>"; };
+		00000000000000000000002F = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CachedModels.swift; path = LiftLog/Models/CachedModels.swift; sourceTree = "<group>"; };
+		000000000000000000000031 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthViewModel.swift; path = LiftLog/ViewModels/AuthViewModel.swift; sourceTree = "<group>"; };
+		000000000000000000000033 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalendarViewModel.swift; path = LiftLog/ViewModels/CalendarViewModel.swift; sourceTree = "<group>"; };
+		000000000000000000000035 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WorkoutPlanViewModel.swift; path = LiftLog/ViewModels/WorkoutPlanViewModel.swift; sourceTree = "<group>"; };
+		000000000000000000000037 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExerciseLibraryViewModel.swift; path = LiftLog/ViewModels/ExerciseLibraryViewModel.swift; sourceTree = "<group>"; };
+		000000000000000000000039 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActiveSessionViewModel.swift; path = LiftLog/ViewModels/ActiveSessionViewModel.swift; sourceTree = "<group>"; };
+		00000000000000000000003B = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StatsViewModel.swift; path = LiftLog/ViewModels/StatsViewModel.swift; sourceTree = "<group>"; };
+		00000000000000000000003D = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileViewModel.swift; path = LiftLog/ViewModels/ProfileViewModel.swift; sourceTree = "<group>"; };
+		00000000000000000000003F = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = LiftLog/Views/Auth/LoginView.swift; sourceTree = "<group>"; };
+		000000000000000000000041 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegisterView.swift; path = LiftLog/Views/Auth/RegisterView.swift; sourceTree = "<group>"; };
+		000000000000000000000043 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoleSelectionView.swift; path = LiftLog/Views/Auth/RoleSelectionView.swift; sourceTree = "<group>"; };
+		000000000000000000000045 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaywallView.swift; path = LiftLog/Views/Auth/PaywallView.swift; sourceTree = "<group>"; };
+		000000000000000000000047 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeView.swift; path = LiftLog/Views/Home/HomeView.swift; sourceTree = "<group>"; };
+		000000000000000000000049 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalendarView.swift; path = LiftLog/Views/Calendar/CalendarView.swift; sourceTree = "<group>"; };
+		00000000000000000000004B = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DayDetailView.swift; path = LiftLog/Views/Calendar/DayDetailView.swift; sourceTree = "<group>"; };
+		00000000000000000000004D = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WorkoutPlanListView.swift; path = LiftLog/Views/Workout/WorkoutPlanListView.swift; sourceTree = "<group>"; };
+		00000000000000000000004F = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WorkoutPlanBuilderView.swift; path = LiftLog/Views/Workout/WorkoutPlanBuilderView.swift; sourceTree = "<group>"; };
+		000000000000000000000051 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExerciseLibraryView.swift; path = LiftLog/Views/Workout/ExerciseLibraryView.swift; sourceTree = "<group>"; };
+		000000000000000000000053 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExercisePickerView.swift; path = LiftLog/Views/Workout/ExercisePickerView.swift; sourceTree = "<group>"; };
+		000000000000000000000055 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActiveSessionView.swift; path = LiftLog/Views/ActiveSession/ActiveSessionView.swift; sourceTree = "<group>"; };
+		000000000000000000000057 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SessionSummaryView.swift; path = LiftLog/Views/ActiveSession/SessionSummaryView.swift; sourceTree = "<group>"; };
+		000000000000000000000059 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StatsView.swift; path = LiftLog/Views/Stats/StatsView.swift; sourceTree = "<group>"; };
+		00000000000000000000005B = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = LiftLog/Views/Profile/ProfileView.swift; sourceTree = "<group>"; };
+		00000000000000000000005D = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClientListView.swift; path = LiftLog/Views/Profile/ClientListView.swift; sourceTree = "<group>"; };
+		00000000000000000000005F = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SupabaseService.swift; path = LiftLog/Services/SupabaseService.swift; sourceTree = "<group>"; };
+		000000000000000000000061 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthService.swift; path = LiftLog/Services/AuthService.swift; sourceTree = "<group>"; };
+		000000000000000000000063 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExerciseService.swift; path = LiftLog/Services/ExerciseService.swift; sourceTree = "<group>"; };
+		000000000000000000000065 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WorkoutService.swift; path = LiftLog/Services/WorkoutService.swift; sourceTree = "<group>"; };
+		000000000000000000000067 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SessionService.swift; path = LiftLog/Services/SessionService.swift; sourceTree = "<group>"; };
+		000000000000000000000069 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationService.swift; path = LiftLog/Services/NotificationService.swift; sourceTree = "<group>"; };
+		00000000000000000000006B = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StripeService.swift; path = LiftLog/Services/StripeService.swift; sourceTree = "<group>"; };
+		00000000000000000000006D = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = LiftLog/Utilities/Constants.swift; sourceTree = "<group>"; };
+		00000000000000000000006F = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = LiftLog/Utilities/Extensions.swift; sourceTree = "<group>"; };
+		000000000000000000000071 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DateHelper.swift; path = LiftLog/Utilities/DateHelper.swift; sourceTree = "<group>"; };
+		000000000000000000000073 = {isa = PBXFileReference; lastKnownFileType = text; name = Localizable.xcstrings; path = LiftLog/Resources/Localizable.xcstrings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+
+/* Begin PBXFrameworksBuildPhase section */
+		000000000000000000000015 = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000000000078,
+				00000000000000000000007A,
+				00000000000000000000007C,
+				00000000000000000000007E,
+				000000000000000000000080,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+
+/* Begin PBXGroup section */
+		000000000000000000000002 = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000004,
+				000000000000000000000003,
+			);
+			name = LiftLog;
+			sourceTree = "<group>";
+		};
+		000000000000000000000003 = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000001D,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		000000000000000000000004 = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000005,
+				000000000000000000000006,
+				000000000000000000000007,
+				000000000000000000000008,
+				000000000000000000000010,
+				000000000000000000000011,
+				000000000000000000000012,
+				00000000000000000000001E,
+			);
+			path = LiftLog;
+			sourceTree = "<group>";
+		};
+		000000000000000000000005 = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000001F,
+				000000000000000000000021,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		000000000000000000000006 = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000023,
+				000000000000000000000025,
+				000000000000000000000027,
+				000000000000000000000029,
+				00000000000000000000002B,
+				00000000000000000000002D,
+				00000000000000000000002F,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		000000000000000000000007 = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000031,
+				000000000000000000000033,
+				000000000000000000000035,
+				000000000000000000000037,
+				000000000000000000000039,
+				00000000000000000000003B,
+				00000000000000000000003D,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		000000000000000000000008 = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000009,
+				00000000000000000000000A,
+				00000000000000000000000B,
+				00000000000000000000000C,
+				00000000000000000000000D,
+				00000000000000000000000E,
+				00000000000000000000000F,
+				000000000000000000000009,
+				00000000000000000000000A,
+				00000000000000000000000B,
+				00000000000000000000000C,
+				00000000000000000000000D,
+				00000000000000000000000E,
+				00000000000000000000000F,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		000000000000000000000009 = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000003F,
+				000000000000000000000041,
+				000000000000000000000043,
+				000000000000000000000045,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		00000000000000000000000A = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000047,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		00000000000000000000000B = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000049,
+				00000000000000000000004B,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		00000000000000000000000C = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000004D,
+				00000000000000000000004F,
+				000000000000000000000051,
+				000000000000000000000053,
+			);
+			path = Workout;
+			sourceTree = "<group>";
+		};
+		00000000000000000000000D = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000055,
+				000000000000000000000057,
+			);
+			path = ActiveSession;
+			sourceTree = "<group>";
+		};
+		00000000000000000000000E = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000059,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
+		00000000000000000000000F = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000005B,
+				00000000000000000000005D,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		000000000000000000000010 = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000005F,
+				000000000000000000000061,
+				000000000000000000000063,
+				000000000000000000000065,
+				000000000000000000000067,
+				000000000000000000000069,
+				00000000000000000000006B,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		000000000000000000000011 = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000006D,
+				00000000000000000000006F,
+				000000000000000000000071,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		000000000000000000000012 = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000073,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+
+/* Begin PBXNativeTarget section */
+		000000000000000000000013 = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00000000000000000000001B;
+			buildPhases = (
+				000000000000000000000014,
+				000000000000000000000015,
+				000000000000000000000016,
+			);
+			buildRules = ();
+			dependencies = ();
+			name = LiftLog;
+			packageProductDependencies = (
+				000000000000000000000077,
+				000000000000000000000079,
+				00000000000000000000007B,
+				00000000000000000000007D,
+				00000000000000000000007F,
+			);
+			productName = LiftLog;
+			productReference = 00000000000000000000001D;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+
+/* Begin PBXProject section */
+		000000000000000000000001 = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					000000000000000000000013 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 00000000000000000000001C;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base, it);
+			mainGroup = 000000000000000000000002;
+			packageReferences = (
+				000000000000000000000075,
+				000000000000000000000076,
+			);
+			productRefGroup = 000000000000000000000003;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				000000000000000000000013,
+			);
+		};
+/* End PBXProject section */
+
+
+/* Begin PBXResourcesBuildPhase section */
+		000000000000000000000016 = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000000000074,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+
+/* Begin PBXSourcesBuildPhase section */
+		000000000000000000000014 = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000000000020,
+				000000000000000000000022,
+				000000000000000000000024,
+				000000000000000000000026,
+				000000000000000000000028,
+				00000000000000000000002A,
+				00000000000000000000002C,
+				00000000000000000000002E,
+				000000000000000000000030,
+				000000000000000000000032,
+				000000000000000000000034,
+				000000000000000000000036,
+				000000000000000000000038,
+				00000000000000000000003A,
+				00000000000000000000003C,
+				00000000000000000000003E,
+				000000000000000000000040,
+				000000000000000000000042,
+				000000000000000000000044,
+				000000000000000000000046,
+				000000000000000000000048,
+				00000000000000000000004A,
+				00000000000000000000004C,
+				00000000000000000000004E,
+				000000000000000000000050,
+				000000000000000000000052,
+				000000000000000000000054,
+				000000000000000000000056,
+				000000000000000000000058,
+				00000000000000000000005A,
+				00000000000000000000005C,
+				00000000000000000000005E,
+				000000000000000000000060,
+				000000000000000000000062,
+				000000000000000000000064,
+				000000000000000000000066,
+				000000000000000000000068,
+				00000000000000000000006A,
+				00000000000000000000006C,
+				00000000000000000000006E,
+				000000000000000000000070,
+				000000000000000000000072,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+
+/* Begin XCBuildConfiguration section */
+		000000000000000000000017 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSET_CATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = LiftLog/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LE_FILE = "";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.liftlog.app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		000000000000000000000018 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSET_CATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = LiftLog/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LE_FILE = "";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.liftlog.app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		000000000000000000000019 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1", "$(inherited)") ;
+
+				GCC_PREPROCESSOR_DEFINITIONS = ();
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ;
+				SWIFT_OPTIMIZATION_LEVEL = -O;
+				
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+
+/* Begin XCConfigurationList section */
+		00000000000000000000001B = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000000000000000000000017,
+				000000000000000000000018,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		00000000000000000000001C = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000000000000000000000019,
+				00000000000000000000001A,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+
+/* Begin XCRemoteSwiftPackageReference section */
+		000000000000000000000075 = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift";
+			requirement = {
+				kind = versionRange;
+				maximumVersion = "3.0.0";
+				minimumVersion = "2.0.0";
+			};
+		};
+		000000000000000000000076 = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stripe/stripe-ios";
+			requirement = {
+				kind = versionRange;
+				maximumVersion = "24.0.0";
+				minimumVersion = "23.0.0";
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+
+/* Begin XCSwiftPackageProductDependency section */
+		000000000000000000000077 = {
+			isa = XCSwiftPackageProductDependency;
+			package = 000000000000000000000075;
+			productName = Supabase;
+		};
+		000000000000000000000079 = {
+			isa = XCSwiftPackageProductDependency;
+			package = 000000000000000000000075;
+			productName = Auth;
+		};
+		00000000000000000000007B = {
+			isa = XCSwiftPackageProductDependency;
+			package = 000000000000000000000075;
+			productName = Storage;
+		};
+		00000000000000000000007D = {
+			isa = XCSwiftPackageProductDependency;
+			package = 000000000000000000000075;
+			productName = Realtime;
+		};
+		00000000000000000000007F = {
+			isa = XCSwiftPackageProductDependency;
+			package = 000000000000000000000076;
+			productName = StripePaymentsUI;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+	};
+	rootObject = 000000000000000000000001;
+}
