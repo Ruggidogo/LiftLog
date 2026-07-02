@@ -169,44 +169,61 @@ struct OnboardingPageView: View {
 struct LoopingVideoPlayer: UIViewRepresentable {
     let url: URL
 
-    func makeUIView(context: Context) -> UIView {
-        let view = UIView(frame: .zero)
-        view.backgroundColor = .black
+    func makeUIView(context: Context) -> LoopingVideoView {
+        let view = LoopingVideoView()
+        view.configure(url: url)
+        return view
+    }
 
-        let player = AVPlayer(url: url)
+    func updateUIView(_ uiView: LoopingVideoView, context: Context) {}
+}
+
+final class LoopingVideoView: UIView {
+    private var player: AVPlayer?
+    private var playerLayer: AVPlayerLayer?
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .black
+    }
+    required init?(coder: NSCoder) { fatalError() }
+
+    func configure(url: URL) {
+        let item = AVPlayerItem(url: url)
+        let player = AVPlayer(playerItem: item)
         player.isMuted = true
+        player.actionAtItemEnd = .none
 
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.videoGravity = .resizeAspectFill
-        playerLayer.frame = UIScreen.main.bounds
-        view.layer.addSublayer(playerLayer)
+        let layer = AVPlayerLayer(player: player)
+        layer.videoGravity = .resizeAspectFill
+        self.layer.addSublayer(layer)
+
+        self.player = player
+        self.playerLayer = layer
 
         player.play()
 
         NotificationCenter.default.addObserver(
-            forName: .AVPlayerItemDidPlayToEndTime,
-            object: player.currentItem,
-            queue: .main
-        ) { _ in
-            player.seek(to: .zero)
-            player.play()
-        }
-
-        context.coordinator.player = player
-        context.coordinator.playerLayer = playerLayer
-        return view
+            self,
+            selector: #selector(loop),
+            name: .AVPlayerItemDidPlayToEndTime,
+            object: item
+        )
     }
 
-    func updateUIView(_ uiView: UIView, context: Context) {
-        context.coordinator.playerLayer?.frame = uiView.bounds
+    @objc private func loop() {
+        player?.seek(to: .zero)
+        player?.play()
     }
 
-    func makeCoordinator() -> Coordinator { Coordinator() }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        playerLayer?.frame = bounds
+    }
 
-    class Coordinator {
-        var player: AVPlayer?
-        var playerLayer: AVPlayerLayer?
-        deinit { NotificationCenter.default.removeObserver(self) }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        player?.pause()
     }
 }
 
