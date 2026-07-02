@@ -34,12 +34,18 @@ final class ProfileViewModel: ObservableObject {
         isSaving = true
         defer { isSaving = false }
         do {
-            let payload: [String: AnyJSON] = [
-                "user_id": .string(settings.userId.uuidString),
-                "enabled": .bool(settings.enabled),
-                "reminder_time": .string(settings.reminderTime),
-                "custom_message": .string(settings.customMessage)
-            ]
+            struct Payload: Encodable {
+                let user_id: String
+                let enabled: Bool
+                let reminder_time: String
+                let custom_message: String
+            }
+            let payload = Payload(
+                user_id: settings.userId.uuidString,
+                enabled: settings.enabled,
+                reminder_time: settings.reminderTime,
+                custom_message: settings.customMessage
+            )
             try await client
                 .from(Constants.Tables.notificationSettings)
                 .upsert(payload)
@@ -53,11 +59,16 @@ final class ProfileViewModel: ObservableObject {
     func updateProfile(user: AppUser) async throws {
         isSaving = true
         defer { isSaving = false }
-        let fields: [String: AnyJSON] = [
-            "full_name": .string(user.fullName),
-            "theme": .string(user.theme.rawValue),
-            "language": .string(user.language.rawValue)
-        ]
+        struct Fields: Encodable {
+            let full_name: String
+            let theme: String
+            let language: String
+        }
+        let fields = Fields(
+            full_name: user.fullName,
+            theme: user.theme.rawValue,
+            language: user.language.rawValue
+        )
         try await AuthService.shared.updateUser(fields)
     }
 

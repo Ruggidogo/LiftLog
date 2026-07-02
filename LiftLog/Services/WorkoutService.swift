@@ -30,14 +30,22 @@ final class WorkoutService {
     }
 
     func createPlan(_ plan: WorkoutPlan) async throws -> WorkoutPlan {
-        let payload: [String: AnyJSON] = [
-            "id": .string(plan.id.uuidString),
-            "name": .string(plan.name),
-            "goal": .string(plan.goal.rawValue),
-            "created_by": .string(plan.createdBy.uuidString),
-            "assigned_to": plan.assignedTo.map { .string($0.uuidString) } ?? .null,
-            "created_at": .string(ISO8601DateFormatter().string(from: plan.createdAt))
-        ]
+        struct PlanInsert: Encodable {
+            let id: String
+            let name: String
+            let goal: String
+            let created_by: String
+            let assigned_to: String?
+            let created_at: String
+        }
+        let payload = PlanInsert(
+            id: plan.id.uuidString,
+            name: plan.name,
+            goal: plan.goal.rawValue,
+            created_by: plan.createdBy.uuidString,
+            assigned_to: plan.assignedTo?.uuidString,
+            created_at: ISO8601DateFormatter().string(from: plan.createdAt)
+        )
         let response: WorkoutPlan = try await client
             .from(Constants.Tables.workoutPlans)
             .insert(payload)
@@ -49,11 +57,16 @@ final class WorkoutService {
     }
 
     func updatePlan(_ plan: WorkoutPlan) async throws {
-        let fields: [String: AnyJSON] = [
-            "name": .string(plan.name),
-            "goal": .string(plan.goal.rawValue),
-            "assigned_to": plan.assignedTo.map { .string($0.uuidString) } ?? .null
-        ]
+        struct PlanUpdate: Encodable {
+            let name: String
+            let goal: String
+            let assigned_to: String?
+        }
+        let fields = PlanUpdate(
+            name: plan.name,
+            goal: plan.goal.rawValue,
+            assigned_to: plan.assignedTo?.uuidString
+        )
         try await client
             .from(Constants.Tables.workoutPlans)
             .update(fields)
@@ -87,17 +100,27 @@ final class WorkoutService {
             .eq("plan_id", value: planId)
             .execute()
         guard !exercises.isEmpty else { return }
-        let payloads: [[String: AnyJSON]] = exercises.enumerated().map { index, ex in
-            [
-                "id": .string(ex.id.uuidString),
-                "plan_id": .string(planId.uuidString),
-                "exercise_id": .string(ex.exerciseId.uuidString),
-                "sets": .double(Double(ex.sets)),
-                "reps": .double(Double(ex.reps)),
-                "rest_seconds": .double(Double(ex.restSeconds)),
-                "sort_order": .double(Double(index)),
-                "notes": .string(ex.notes)
-            ]
+        struct PlanExerciseInsert: Encodable {
+            let id: String
+            let plan_id: String
+            let exercise_id: String
+            let sets: Int
+            let reps: Int
+            let rest_seconds: Int
+            let sort_order: Int
+            let notes: String
+        }
+        let payloads = exercises.enumerated().map { index, ex in
+            PlanExerciseInsert(
+                id: ex.id.uuidString,
+                plan_id: planId.uuidString,
+                exercise_id: ex.exerciseId.uuidString,
+                sets: ex.sets,
+                reps: ex.reps,
+                rest_seconds: ex.restSeconds,
+                sort_order: index,
+                notes: ex.notes
+            )
         }
         try await client
             .from(Constants.Tables.planExercises)
@@ -113,14 +136,12 @@ final class WorkoutService {
             .execute()
             .value
         guard !ptClients.isEmpty else { return [] }
-        let clientIds = ptClients.map { $0.clientId.uuidString }.joined(separator: ",")
         let users: [AppUser] = try await client
             .from(Constants.Tables.users)
             .select()
             .in("id", values: ptClients.map { $0.clientId.uuidString })
             .execute()
             .value
-        _ = clientIds
         return users
     }
 
@@ -131,14 +152,19 @@ final class WorkoutService {
             .eq("email", value: clientEmail)
             .execute()
             .value
-        guard let client_user = users.first else {
+        guard let clientUser = users.first else {
             throw AppError.validation(String(localized: "error.client_not_found"))
         }
-        let payload: [String: AnyJSON] = [
-            "id": .string(UUID().uuidString),
-            "pt_id": .string(ptId.uuidString),
-            "client_id": .string(client_user.id.uuidString)
-        ]
+        struct PTClientInsert: Encodable {
+            let id: String
+            let pt_id: String
+            let client_id: String
+        }
+        let payload = PTClientInsert(
+            id: UUID().uuidString,
+            pt_id: ptId.uuidString,
+            client_id: clientUser.id.uuidString
+        )
         try await client
             .from(Constants.Tables.ptClients)
             .insert(payload)
