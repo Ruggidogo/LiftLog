@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
 
     var body: some View {
         Group {
@@ -9,7 +10,14 @@ struct ContentView: View {
             case .loading:
                 SplashView()
             case .unauthenticated:
-                LoginView()
+                if hasSeenOnboarding {
+                    LoginView()
+                } else {
+                    OnboardingView(showOnboarding: Binding(
+                        get: { !hasSeenOnboarding },
+                        set: { show in hasSeenOnboarding = !show }
+                    ))
+                }
             case .roleSelection:
                 RoleSelectionView()
             case .paywall:
@@ -23,16 +31,28 @@ struct ContentView: View {
 }
 
 struct SplashView: View {
+    @State private var scale: CGFloat = 0.8
+    @State private var opacity: Double = 0
+
     var body: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "dumbbell.fill")
-                .font(.system(size: 60))
-                .foregroundColor(.accentColor)
-            Text("LiftLog")
-                .font(.largeTitle.bold())
+        ZStack {
+            Color.black.ignoresSafeArea()
+            VStack(spacing: 16) {
+                LiftLogLogoView(size: 90)
+                    .scaleEffect(scale)
+                    .opacity(opacity)
+                Text("LiftLog")
+                    .font(.system(size: 34, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+                    .opacity(opacity)
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.systemBackground))
+        .onAppear {
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.7)) {
+                scale = 1.0
+                opacity = 1.0
+            }
+        }
     }
 }
 
