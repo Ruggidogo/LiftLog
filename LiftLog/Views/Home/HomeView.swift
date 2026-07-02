@@ -7,28 +7,23 @@ struct HomeView: View {
     @State private var activeSession: Session?
     @State private var activePlanExercises: [PlanExercise] = []
 
-    private var todaySessions: [Session] {
-        calendarVM.sessionsFor(date: Date())
-    }
-
-    private var weekSessions: [Date: Bool] {
-        let days = DateHelper.weekDates(containing: Date())
-        return Dictionary(uniqueKeysWithValues: days.map { date in
-            (date, calendarVM.hasSession(on: date))
-        })
-    }
+    private var todaySessions: [Session] { calendarVM.sessionsFor(date: Date()) }
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-                    greetingSection
-                    todayCard
-                    weeklyStreakSection
-                    quickActionsSection
+            ZStack {
+                Color.brandDeep.ignoresSafeArea()
+
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 24) {
+                        greetingSection
+                        todayCard
+                        weeklyStreakSection
+                        quickActionsSection
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 40)
                 }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 40)
             }
             .navigationBarHidden(true)
             .task {
@@ -46,14 +41,19 @@ struct HomeView: View {
     }
 
     private var greetingSection: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(LocalizedStringKey(DateHelper.greetingKey()))
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-            Text(authViewModel.currentUser?.fullName.components(separatedBy: " ").first ?? "Athlete")
-                .font(.largeTitle.bold())
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(LocalizedStringKey(DateHelper.greetingKey()))
+                    .font(.subheadline)
+                    .foregroundColor(.textSecondary)
+                Text(authViewModel.currentUser?.fullName.components(separatedBy: " ").first ?? "Athlete")
+                    .font(.system(size: 30, weight: .bold, design: .rounded))
+                    .foregroundColor(.textPrimary)
+            }
+            Spacer()
+            LiftLogLogoView(size: 44)
         }
-        .padding(.top, 20)
+        .padding(.top, 56)
     }
 
     private var todayCard: some View {
@@ -70,44 +70,45 @@ struct HomeView: View {
     }
 
     private var weeklyStreakSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(String(localized: "home.weekly_streak"))
-                .font(.headline)
+        BrandCard {
+            VStack(alignment: .leading, spacing: 14) {
+                SectionHeader(title: "This Week")
 
-            HStack(spacing: 8) {
-                ForEach(DateHelper.weekDates(containing: Date()), id: \.self) { date in
-                    VStack(spacing: 4) {
-                        Text(date.weekdaySymbol)
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
-                        Circle()
-                            .fill(calendarVM.hasSession(on: date) ? Color.accentColor : Color(.systemFill))
-                            .frame(width: 32, height: 32)
-                            .overlay(
-                                date.isToday ?
-                                Circle().stroke(Color.accentColor, lineWidth: 2) : nil
-                            )
+                HStack(spacing: 6) {
+                    ForEach(DateHelper.weekDates(containing: Date()), id: \.self) { date in
+                        VStack(spacing: 6) {
+                            Text(date.weekdaySymbol)
+                                .font(.system(size: 11, weight: .medium))
+                                .foregroundColor(.textSecondary)
+                            ZStack {
+                                Circle()
+                                    .fill(calendarVM.hasSession(on: date) ? Color.brand : Color.surfaceHigh)
+                                    .frame(width: 34, height: 34)
+                                if date.isToday {
+                                    Circle()
+                                        .stroke(Color.brand, lineWidth: 2)
+                                        .frame(width: 34, height: 34)
+                                }
+                                if calendarVM.hasSession(on: date) {
+                                    Image(systemName: "checkmark")
+                                        .font(.system(size: 12, weight: .bold))
+                                        .foregroundColor(.black)
+                                }
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
                     }
-                    .frame(maxWidth: .infinity)
                 }
             }
         }
-        .padding(16)
-        .background(Color(.secondarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 
     private var quickActionsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(String(localized: "home.quick_actions"))
-                .font(.headline)
+            SectionHeader(title: "Quick Actions")
 
             HStack(spacing: 12) {
-                QuickActionButton(
-                    title: String(localized: "home.action.new_session"),
-                    icon: "plus.circle.fill",
-                    color: .green
-                ) {
+                QuickActionButton(title: "New Session", icon: "plus.circle.fill", color: .brand) {
                     if let userId = authViewModel.currentUser?.id {
                         Task {
                             if let session = try? await calendarVM.createSession(on: Date(), planId: nil, userId: userId) {
@@ -118,18 +119,8 @@ struct HomeView: View {
                         }
                     }
                 }
-
-                QuickActionButton(
-                    title: String(localized: "tab.plans"),
-                    icon: "list.bullet.clipboard.fill",
-                    color: .blue
-                ) {}
-
-                QuickActionButton(
-                    title: String(localized: "exercise.library"),
-                    icon: "book.fill",
-                    color: .orange
-                ) {}
+                QuickActionButton(title: "My Plans", icon: "list.bullet.clipboard.fill", color: Color(red: 0.4, green: 0.6, blue: 1.0)) {}
+                QuickActionButton(title: "Exercises", icon: "book.fill", color: Color(red: 1.0, green: 0.6, blue: 0.2)) {}
             }
         }
     }
@@ -140,52 +131,60 @@ struct TodaySessionCard: View {
     let onStart: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(String(localized: "home.today_session"))
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    Text(session.endedAt != nil ? String(localized: "session.completed") : String(localized: "session.scheduled"))
-                        .font(.headline)
+        BrandCard {
+            VStack(alignment: .leading, spacing: 14) {
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("TODAY")
+                            .font(.system(size: 11, weight: .bold))
+                            .foregroundColor(.brand)
+                            .tracking(1.2)
+                        Text(session.endedAt != nil ? "Completed" : "Scheduled")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(.textPrimary)
+                    }
+                    Spacer()
+                    ZStack {
+                        Circle()
+                            .fill(session.endedAt != nil ? Color.brand.opacity(0.2) : Color.surfaceHigh)
+                            .frame(width: 44, height: 44)
+                        Image(systemName: session.endedAt != nil ? "checkmark" : "bolt.fill")
+                            .foregroundColor(session.endedAt != nil ? .brand : .textSecondary)
+                            .font(.system(size: 16, weight: .semibold))
+                    }
                 }
-                Spacer()
-                Image(systemName: session.endedAt != nil ? "checkmark.circle.fill" : "clock.fill")
-                    .foregroundColor(session.endedAt != nil ? .green : .accentColor)
-                    .font(.title2)
-            }
 
-            if session.endedAt == nil {
-                Button(action: onStart) {
-                    Text(String(localized: "button.start_workout"))
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 44)
+                if session.endedAt == nil {
+                    BrandButton(title: "Start Workout", action: onStart)
                 }
-                .buttonStyle(.borderedProminent)
             }
         }
-        .padding(16)
-        .background(Color(.secondarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 }
 
 struct EmptyTodayCard: View {
     var body: some View {
-        VStack(spacing: 8) {
-            Image(systemName: "calendar.badge.plus")
-                .font(.title)
-                .foregroundColor(.secondary)
-            Text(String(localized: "home.no_session_today"))
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
+        BrandCard {
+            HStack(spacing: 16) {
+                ZStack {
+                    Circle()
+                        .fill(Color.brand.opacity(0.12))
+                        .frame(width: 52, height: 52)
+                    Image(systemName: "calendar.badge.plus")
+                        .font(.system(size: 22))
+                        .foregroundColor(.brand)
+                }
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("No session today")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.textPrimary)
+                    Text("Tap + to start a free workout")
+                        .font(.caption)
+                        .foregroundColor(.textSecondary)
+                }
+                Spacer()
+            }
         }
-        .frame(maxWidth: .infinity)
-        .padding(24)
-        .background(Color(.secondarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 }
 
@@ -197,19 +196,25 @@ struct QuickActionButton: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 8) {
-                Image(systemName: icon)
-                    .font(.title2)
-                    .foregroundColor(color)
+            VStack(spacing: 10) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(color.opacity(0.15))
+                        .frame(width: 48, height: 48)
+                    Image(systemName: icon)
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundColor(color)
+                }
                 Text(title)
-                    .font(.caption)
-                    .foregroundColor(.primary)
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.textSecondary)
                     .multilineTextAlignment(.center)
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 16)
-            .background(Color(.secondarySystemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 14))
+            .background(Color.surface)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.divider, lineWidth: 1))
         }
         .buttonStyle(.plain)
     }

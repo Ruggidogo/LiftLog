@@ -62,29 +62,21 @@ struct MainTabView: View {
     var body: some View {
         TabView {
             HomeView()
-                .tabItem {
-                    Label(String(localized: "tab.home"), systemImage: "house.fill")
-                }
+                .tabItem { Label("Home", systemImage: "house.fill") }
 
             CalendarView()
-                .tabItem {
-                    Label(String(localized: "tab.calendar"), systemImage: "calendar")
-                }
+                .tabItem { Label("Calendar", systemImage: "calendar") }
 
             WorkoutPlanListView()
-                .tabItem {
-                    Label(String(localized: "tab.plans"), systemImage: "list.bullet.clipboard.fill")
-                }
+                .tabItem { Label("Plans", systemImage: "list.bullet.clipboard.fill") }
 
             StatsView()
-                .tabItem {
-                    Label(String(localized: "tab.stats"), systemImage: "chart.line.uptrend.xyaxis")
-                }
+                .tabItem { Label("Stats", systemImage: "chart.line.uptrend.xyaxis") }
 
             ProfileView()
-                .tabItem {
-                    Label(String(localized: "tab.profile"), systemImage: "person.fill")
-                }
+                .tabItem { Label("Profile", systemImage: "person.fill") }
         }
+        .tint(.brand)
+        .preferredColorScheme(.dark)
     }
 }

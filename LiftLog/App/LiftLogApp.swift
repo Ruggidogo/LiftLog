@@ -10,7 +10,7 @@ struct LiftLogApp: SwiftUI.App {
         WindowGroup {
             ContentView()
                 .environmentObject(authViewModel)
-                .preferredColorScheme(colorScheme(for: appTheme))
+                .preferredColorScheme(.dark)
                 .task {
                     await authViewModel.checkSession()
                     NotificationService.shared.requestAuthorization()

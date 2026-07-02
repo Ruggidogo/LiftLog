@@ -4,100 +4,116 @@ struct PaywallView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var isCheckingPayment = false
 
-    var body: some View {
-        VStack(spacing: 32) {
-            Spacer()
-
-            VStack(spacing: 16) {
-                Image(systemName: "lock.fill")
-                    .font(.system(size: 56))
-                    .foregroundColor(.accentColor)
-                Text(String(localized: "paywall.title"))
-                    .font(.largeTitle.bold())
-                    .multilineTextAlignment(.center)
-                Text(String(localized: "paywall.subtitle"))
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
-            }
-            .padding(.horizontal, 32)
-
-            VStack(spacing: 8) {
-                PaywallFeatureRow(icon: "chart.line.uptrend.xyaxis", text: String(localized: "paywall.feature.stats"))
-                PaywallFeatureRow(icon: "calendar.badge.checkmark", text: String(localized: "paywall.feature.calendar"))
-                PaywallFeatureRow(icon: "list.bullet.clipboard.fill", text: String(localized: "paywall.feature.plans"))
-                PaywallFeatureRow(icon: "dumbbell.fill", text: String(localized: "paywall.feature.sessions"))
-            }
-            .padding(.horizontal, 32)
-
-            Spacer()
-
-            VStack(spacing: 12) {
-                Text(Constants.Stripe.monthlyPrice + " / " + String(localized: "paywall.month"))
-                    .font(.title2.bold())
-
-                Button {
-                    if let userId = authViewModel.currentUser?.id {
-                        StripeService.shared.openCheckout(userId: userId)
-                        isCheckingPayment = true
-                    }
-                } label: {
-                    Text(String(localized: "paywall.cta"))
-                        .fontWeight(.bold)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 54)
-                }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-
-                Button {
-                    Task {
-                        isCheckingPayment = true
-                        await authViewModel.refreshUser()
-                        isCheckingPayment = false
-                    }
-                } label: {
-                    Text(String(localized: "paywall.restore"))
-                        .foregroundColor(.secondary)
-                        .font(.subheadline)
-                }
-
-                Button(role: .destructive) {
-                    Task { await authViewModel.signOut() }
-                } label: {
-                    Text(String(localized: "button.signout"))
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-            }
-            .padding(.horizontal, 24)
-            .padding(.bottom, 40)
-        }
-        .overlay {
-            if isCheckingPayment {
-                ProgressView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.black.opacity(0.3))
-            }
-        }
-    }
-}
-
-struct PaywallFeatureRow: View {
-    let icon: String
-    let text: String
+    private let features: [(icon: String, text: String)] = [
+        ("chart.line.uptrend.xyaxis", "Advanced progress charts & analytics"),
+        ("calendar.badge.checkmark", "Full training calendar & scheduling"),
+        ("list.bullet.clipboard.fill", "Unlimited workout plans"),
+        ("figure.strengthtraining.traditional", "Unlimited session tracking"),
+        ("person.2.fill", "PT client management"),
+        ("bell.badge.fill", "Smart training reminders")
+    ]
 
     var body: some View {
-        HStack(spacing: 12) {
-            Image(systemName: icon)
-                .foregroundColor(.accentColor)
-                .frame(width: 24)
-            Text(text)
-                .font(.subheadline)
-            Spacer()
-            Image(systemName: "checkmark")
-                .foregroundColor(.green)
-                .font(.caption.bold())
+        ZStack {
+            Color.brandDeep.ignoresSafeArea()
+
+            VStack(spacing: 0) {
+                Spacer()
+
+                // Icon + title
+                VStack(spacing: 20) {
+                    ZStack {
+                        Circle()
+                            .fill(Color.brand.opacity(0.15))
+                            .frame(width: 100, height: 100)
+                        LiftLogLogoView(size: 64)
+                    }
+
+                    VStack(spacing: 8) {
+                        Text("Unlock LiftLog")
+                            .font(.system(size: 30, weight: .bold, design: .rounded))
+                            .foregroundColor(.textPrimary)
+                        Text("Everything you need to train smarter")
+                            .font(.subheadline)
+                            .foregroundColor(.textSecondary)
+                            .multilineTextAlignment(.center)
+                    }
+                }
+                .padding(.bottom, 36)
+
+                // Features
+                VStack(spacing: 0) {
+                    ForEach(features, id: \.text) { feature in
+                        HStack(spacing: 14) {
+                            Image(systemName: feature.icon)
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(.brand)
+                                .frame(width: 28)
+                            Text(feature.text)
+                                .font(.subheadline)
+                                .foregroundColor(.textPrimary)
+                            Spacer()
+                            Image(systemName: "checkmark")
+                                .font(.caption.bold())
+                                .foregroundColor(.brand)
+                        }
+                        .padding(.vertical, 12)
+                        if feature.text != features.last?.text {
+                            Divider().background(Color.divider)
+                        }
+                    }
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 8)
+                .background(Color.surface)
+                .clipShape(RoundedRectangle(cornerRadius: 18))
+                .overlay(RoundedRectangle(cornerRadius: 18).stroke(Color.divider, lineWidth: 1))
+                .padding(.horizontal, 24)
+                .padding(.bottom, 32)
+
+                Spacer()
+
+                // CTA
+                VStack(spacing: 14) {
+                    VStack(spacing: 4) {
+                        Text(Constants.Stripe.monthlyPrice)
+                            .font(.system(size: 36, weight: .bold, design: .rounded))
+                            .foregroundColor(.textPrimary)
+                        Text("per month · cancel anytime")
+                            .font(.caption)
+                            .foregroundColor(.textSecondary)
+                    }
+
+                    BrandButton(title: "Start Free Trial", isLoading: isCheckingPayment) {
+                        if let userId = authViewModel.currentUser?.id {
+                            StripeService.shared.openCheckout(userId: userId)
+                            isCheckingPayment = true
+                        }
+                    }
+
+                    Button {
+                        Task {
+                            isCheckingPayment = true
+                            await authViewModel.refreshUser()
+                            isCheckingPayment = false
+                        }
+                    } label: {
+                        Text("Restore Purchase")
+                            .font(.subheadline)
+                            .foregroundColor(.textSecondary)
+                    }
+
+                    Button(role: .destructive) {
+                        Task { await authViewModel.signOut() }
+                    } label: {
+                        Text("Sign Out")
+                            .font(.caption)
+                            .foregroundColor(.textSecondary.opacity(0.6))
+                    }
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 44)
+            }
         }
     }
 }

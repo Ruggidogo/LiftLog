@@ -2,79 +2,75 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
-    @State private var email = ""
-    @State private var password = ""
+    @State private var email = "ruggeroartini03@gmail.com"
+    @State private var password = "testtest"
     @State private var showRegister = false
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 32) {
-                    VStack(spacing: 8) {
-                        Image(systemName: "dumbbell.fill")
-                            .font(.system(size: 56))
-                            .foregroundColor(.accentColor)
-                        Text("LiftLog")
-                            .font(.largeTitle.bold())
-                        Text(String(localized: "login.subtitle"))
+            ZStack {
+                Color.brandDeep.ignoresSafeArea()
+
+                ScrollView {
+                    VStack(spacing: 0) {
+                        // Header
+                        VStack(spacing: 16) {
+                            LiftLogLogoView(size: 72)
+                                .padding(.top, 60)
+                            Text("LiftLog")
+                                .font(.system(size: 32, weight: .bold, design: .rounded))
+                                .foregroundColor(.textPrimary)
+                            Text("Your premium training companion")
+                                .font(.subheadline)
+                                .foregroundColor(.textSecondary)
+                        }
+                        .padding(.bottom, 48)
+
+                        // Form
+                        VStack(spacing: 14) {
+                            BrandTextField(
+                                placeholder: "Email",
+                                text: $email,
+                                keyboardType: .emailAddress,
+                                contentType: .emailAddress
+                            )
+
+                            BrandTextField(
+                                placeholder: "Password",
+                                text: $password,
+                                isSecure: true,
+                                contentType: .password
+                            )
+                        }
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 28)
+
+                        // Buttons
+                        VStack(spacing: 12) {
+                            BrandButton(
+                                title: "Log In",
+                                isLoading: authViewModel.isLoading,
+                                isDisabled: email.isEmpty || password.isEmpty
+                            ) {
+                                Task { await authViewModel.signIn(email: email, password: password) }
+                            }
+
+                            Button {
+                                showRegister = true
+                            } label: {
+                                Text("Don't have an account? ")
+                                    .foregroundColor(.textSecondary)
+                                + Text("Sign Up")
+                                    .foregroundColor(.brand)
+                                    .fontWeight(.semibold)
+                            }
                             .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-                    .padding(.top, 40)
-
-                    VStack(spacing: 16) {
-                        TextField(String(localized: "field.email"), text: $email)
-                            .textContentType(.emailAddress)
-                            .keyboardType(.emailAddress)
-                            .autocapitalization(.none)
-                            .textFieldStyle(.roundedBorder)
-
-                        SecureField(String(localized: "field.password"), text: $password)
-                            .textContentType(.password)
-                            .textFieldStyle(.roundedBorder)
-                    }
-
-                    VStack(spacing: 12) {
-                        Button {
-                            Task { await authViewModel.signIn(email: email, password: password) }
-                        } label: {
-                            Group {
-                                if authViewModel.isLoading {
-                                    ProgressView()
-                                        .tint(.white)
-                                } else {
-                                    Text(String(localized: "button.login"))
-                                        .fontWeight(.semibold)
-                                }
-                            }
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 50)
+                            .padding(.top, 4)
                         }
-                        .buttonStyle(.borderedProminent)
-                        .disabled(email.isEmpty || password.isEmpty || authViewModel.isLoading)
-
-                        Button {
-                            // Google Sign In — requires GoogleSignIn SDK integration
-                        } label: {
-                            HStack {
-                                Image(systemName: "globe")
-                                Text(String(localized: "button.signin_google"))
-                            }
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 50)
-                        }
-                        .buttonStyle(.bordered)
+                        .padding(.horizontal, 24)
                     }
-
-                    Button {
-                        showRegister = true
-                    } label: {
-                        Text(String(localized: "login.no_account"))
-                            .foregroundColor(.accentColor)
-                    }
+                    .padding(.bottom, 40)
                 }
-                .padding(.horizontal, 24)
-                .padding(.bottom, 40)
             }
             .navigationDestination(isPresented: $showRegister) {
                 RegisterView()

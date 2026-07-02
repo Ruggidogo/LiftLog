@@ -53,7 +53,7 @@
 		000000000000000000000078 = {isa = PBXBuildFile; productRef = 000000000000000000000077; };
 		00000000000000000000007A = {isa = PBXBuildFile; productRef = 000000000000000000000079; };
 		000000000000000000000081 = {isa = PBXBuildFile; fileRef = 000000000000000000000080; };
-		000000000000000000000083 = {isa = PBXBuildFile; fileRef = 000000000000000000000082; };
+		000000000000000000000085 = {isa = PBXBuildFile; fileRef = 000000000000000000000084; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +103,7 @@
 		000000000000000000000053 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DateHelper.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		000000000000000000000055 = {isa = PBXFileReference; lastKnownFileType = text; name = Localizable.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		000000000000000000000080 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingView.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		000000000000000000000084 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DesignSystem.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +287,7 @@
 				00000000000000000000004F,
 				000000000000000000000051,
 				000000000000000000000053,
+				000000000000000000000084,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -419,6 +421,7 @@
 				000000000000000000000052,
 				000000000000000000000054,
 				000000000000000000000081,
+				000000000000000000000085,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
