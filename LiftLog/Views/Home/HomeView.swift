@@ -47,7 +47,7 @@ struct HomeView: View {
 
     private var greetingSection: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(String(localized: LocalizedStringKey(DateHelper.greetingKey())))
+            Text(LocalizedStringKey(DateHelper.greetingKey()))
                 .font(.subheadline)
                 .foregroundColor(.secondary)
             Text(authViewModel.currentUser?.fullName.components(separatedBy: " ").first ?? "Athlete")
