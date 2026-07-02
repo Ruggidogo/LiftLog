@@ -52,6 +52,8 @@
 		000000000000000000000056 = {isa = PBXBuildFile; fileRef = 000000000000000000000055; };
 		000000000000000000000078 = {isa = PBXBuildFile; productRef = 000000000000000000000077; };
 		00000000000000000000007A = {isa = PBXBuildFile; productRef = 000000000000000000000079; };
+		000000000000000000000081 = {isa = PBXBuildFile; fileRef = 000000000000000000000080; };
+		000000000000000000000083 = {isa = PBXBuildFile; fileRef = 000000000000000000000082; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +102,8 @@
 		000000000000000000000051 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		000000000000000000000053 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DateHelper.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		000000000000000000000055 = {isa = PBXFileReference; lastKnownFileType = text; name = Localizable.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		000000000000000000000080 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingView.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		000000000000000000000082 = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = LiftLog/Resources/Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +208,7 @@
 				000000000000000000000023,
 				000000000000000000000025,
 				000000000000000000000027,
+				000000000000000000000080,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -290,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				000000000000000000000055,
+				000000000000000000000082,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -362,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				000000000000000000000056,
+				000000000000000000000083,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +421,7 @@
 				000000000000000000000050,
 				000000000000000000000052,
 				000000000000000000000054,
+				000000000000000000000081,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +437,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = LiftLog/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -447,6 +457,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_STYLE = Automatic;

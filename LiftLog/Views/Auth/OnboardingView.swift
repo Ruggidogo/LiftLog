@@ -139,54 +139,57 @@ struct OnboardingPageView: View {
     }
 }
 
-// Programmatic logo — doppia L su sfondo verde arrotondato
+// Programmatic logo — L + L speculare orizzontale, sfondo verde scuro
+// Replica fedele del logo scelto (dark green, due L bianche affiancate)
 struct LiftLogLogoView: View {
     let size: CGFloat
 
+    private let bgDark   = Color(red: 0.07, green: 0.27, blue: 0.18)
+    private let bgMid    = Color(red: 0.09, green: 0.33, blue: 0.21)
+    private let green    = Color(red: 0.12, green: 0.55, blue: 0.33)
+
     var body: some View {
         ZStack {
+            // Sfondo verde scuro con radial highlight come nel logo
             RoundedRectangle(cornerRadius: size * 0.22)
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            Color(red: 0.16, green: 0.70, blue: 0.42),
-                            Color(red: 0.08, green: 0.45, blue: 0.27)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
+                .fill(bgDark)
                 .frame(width: size, height: size)
-                .shadow(color: Color(red: 0.13, green: 0.55, blue: 0.33).opacity(0.5), radius: size * 0.15, y: size * 0.08)
+                .overlay(
+                    RoundedRectangle(cornerRadius: size * 0.22)
+                        .fill(
+                            RadialGradient(
+                                colors: [bgMid.opacity(0.9), Color.clear],
+                                center: .init(x: 0.35, y: 0.35),
+                                startRadius: 0,
+                                endRadius: size * 0.65
+                            )
+                        )
+                )
+                .shadow(color: green.opacity(0.45), radius: size * 0.18, y: size * 0.07)
 
-            // Doppia L: una normale, una capovolta
-            VStack(spacing: size * 0.03) {
-                LShape(size: size * 0.35)
+            // Le due L affiancate: sinistra normale, destra speculare (flippata X)
+            HStack(spacing: size * 0.04) {
+                LLetterShape()
                     .fill(.white)
-                LShape(size: size * 0.35)
-                    .fill(.white.opacity(0.75))
-                    .rotationEffect(.degrees(180))
+                    .frame(width: size * 0.30, height: size * 0.42)
+                LLetterShape()
+                    .fill(.white)
+                    .frame(width: size * 0.30, height: size * 0.42)
+                    .scaleEffect(x: -1, y: 1) // specchio orizzontale
             }
         }
+        .frame(width: size, height: size)
     }
 }
 
-struct LShape: Shape {
-    let size: CGFloat
-
+struct LLetterShape: Shape {
     func path(in rect: CGRect) -> Path {
-        let w = size
-        let h = size
-        let t = size * 0.28  // thickness
-
-        var path = Path()
-        path.move(to: CGPoint(x: rect.midX - w/2, y: rect.midY - h/2))
-        path.addLine(to: CGPoint(x: rect.midX - w/2 + t, y: rect.midY - h/2))
-        path.addLine(to: CGPoint(x: rect.midX - w/2 + t, y: rect.midY + h/2 - t))
-        path.addLine(to: CGPoint(x: rect.midX + w/2, y: rect.midY + h/2 - t))
-        path.addLine(to: CGPoint(x: rect.midX + w/2, y: rect.midY + h/2))
-        path.addLine(to: CGPoint(x: rect.midX - w/2, y: rect.midY + h/2))
-        path.closeSubpath()
-        return path
+        let t = rect.width * 0.36  // spessore del tratto
+        var p = Path()
+        // gamba verticale
+        p.addRect(CGRect(x: 0, y: 0, width: t, height: rect.height))
+        // base orizzontale
+        p.addRect(CGRect(x: 0, y: rect.height - t, width: rect.width, height: t))
+        return p
     }
 }
