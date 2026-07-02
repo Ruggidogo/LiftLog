@@ -1,8 +1,6 @@
 import Foundation
 
 enum DateHelper {
-    static let shared = DateHelper()
-
     static func daysInMonth(year: Int, month: Int) -> Int {
         var components = DateComponents()
         components.year = year
