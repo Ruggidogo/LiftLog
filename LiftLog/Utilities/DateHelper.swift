@@ -59,12 +59,12 @@ enum DateHelper {
         return dates
     }
 
-    static func greetingKey() -> String {
+    static func greeting() -> String {
         let hour = Calendar.current.component(.hour, from: Date())
         switch hour {
-        case 5..<12: return "greeting.morning"
-        case 12..<17: return "greeting.afternoon"
-        default: return "greeting.evening"
+        case 5..<12: return "Good morning"
+        case 12..<17: return "Good afternoon"
+        default: return "Good evening"
         }
     }
 
