@@ -87,15 +87,13 @@ struct HomeView: View {
         HStack(spacing: 12) {
             StatPill(
                 value: "\(currentStreak)",
-                label: currentStreak == 1 ? "Day Streak" : "Day Streak",
-                icon: "flame.fill",
-                iconColor: Color(red: 1.0, green: 0.55, blue: 0.2)
+                label: "Day Streak",
+                icon: PremiumIcon.flame(systemName: "flame.fill", size: 40)
             )
             StatPill(
                 value: "\(monthSessionCount)",
                 label: "This Month",
-                icon: "calendar.badge.checkmark",
-                iconColor: .brand
+                icon: PremiumIcon.green(systemName: "calendar.badge.checkmark", size: 40)
             )
         }
     }
@@ -197,7 +195,10 @@ struct HomeView: View {
             SectionHeader(title: "Quick Actions")
 
             HStack(spacing: 12) {
-                QuickActionButton(title: "New Session", icon: "plus.circle.fill", color: .brand) {
+                QuickActionButton(
+                    title: "New Session",
+                    icon: PremiumIcon.green(systemName: "bolt.fill", size: 44)
+                ) {
                     if let userId = authViewModel.currentUser?.id {
                         Task {
                             if let session = try? await calendarVM.createSession(on: Date(), planId: nil, userId: userId) {
@@ -208,8 +209,14 @@ struct HomeView: View {
                         }
                     }
                 }
-                QuickActionButton(title: "My Plans", icon: "list.bullet.clipboard.fill", color: Color(red: 0.4, green: 0.6, blue: 1.0)) {}
-                QuickActionButton(title: "Exercises", icon: "book.fill", color: Color(red: 1.0, green: 0.6, blue: 0.2)) {}
+                QuickActionButton(
+                    title: "My Plans",
+                    icon: PremiumIcon.blue(systemName: "list.bullet.clipboard.fill", size: 44)
+                ) {}
+                QuickActionButton(
+                    title: "Exercises",
+                    icon: PremiumIcon.flame(systemName: "dumbbell.fill", size: 44)
+                ) {}
             }
         }
     }
@@ -220,19 +227,11 @@ struct HomeView: View {
 struct StatPill: View {
     let value: String
     let label: String
-    let icon: String
-    let iconColor: Color
+    let icon: PremiumIcon
 
     var body: some View {
         HStack(spacing: 12) {
-            ZStack {
-                Circle()
-                    .fill(iconColor.opacity(0.15))
-                    .frame(width: 40, height: 40)
-                Image(systemName: icon)
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(iconColor)
-            }
+            icon
             VStack(alignment: .leading, spacing: 2) {
                 Text(value)
                     .font(.system(size: 22, weight: .bold, design: .rounded))
@@ -272,13 +271,10 @@ struct TodaySessionCard: View {
                             .foregroundColor(.textPrimary)
                     }
                     Spacer()
-                    ZStack {
-                        Circle()
-                            .fill(session.endedAt != nil ? Color.brand.opacity(0.2) : Color.surfaceHigh)
-                            .frame(width: 44, height: 44)
-                        Image(systemName: session.endedAt != nil ? "checkmark" : "bolt.fill")
-                            .foregroundColor(session.endedAt != nil ? .brand : .textSecondary)
-                            .font(.system(size: 16, weight: .semibold))
+                    if session.endedAt != nil {
+                        PremiumIcon.green(systemName: "checkmark.seal.fill", size: 44)
+                    } else {
+                        PremiumIcon.flame(systemName: "bolt.fill", size: 44)
                     }
                 }
 
@@ -298,14 +294,7 @@ struct EmptyTodayCard: View {
         BrandCard {
             VStack(alignment: .leading, spacing: 16) {
                 HStack(spacing: 16) {
-                    ZStack {
-                        Circle()
-                            .fill(Color.brand.opacity(0.12))
-                            .frame(width: 52, height: 52)
-                        Image(systemName: "figure.strengthtraining.traditional")
-                            .font(.system(size: 22))
-                            .foregroundColor(.brand)
-                    }
+                    PremiumIcon.green(systemName: "figure.strengthtraining.traditional", size: 52)
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Rest day")
                             .font(.system(size: 16, weight: .semibold))
@@ -341,21 +330,13 @@ struct EmptyTodayCard: View {
 
 struct QuickActionButton: View {
     let title: String
-    let icon: String
-    let color: Color
+    let icon: PremiumIcon
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
             VStack(spacing: 10) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(color.opacity(0.15))
-                        .frame(width: 48, height: 48)
-                    Image(systemName: icon)
-                        .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(color)
-                }
+                icon
                 Text(title)
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(.textSecondary)

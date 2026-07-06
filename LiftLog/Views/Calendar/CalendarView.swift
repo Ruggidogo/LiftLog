@@ -220,14 +220,7 @@ struct CalendarView: View {
 
             if upcoming.isEmpty {
                 VStack(spacing: 10) {
-                    ZStack {
-                        Circle()
-                            .fill(Color.surface)
-                            .frame(width: 60, height: 60)
-                        Image(systemName: "calendar.badge.plus")
-                            .font(.system(size: 26))
-                            .foregroundColor(.textSecondary)
-                    }
+                    PremiumIcon.green(systemName: "calendar.badge.plus", size: 60)
                     Text("No upcoming sessions")
                         .font(.system(size: 15, weight: .medium))
                         .foregroundColor(.textSecondary)

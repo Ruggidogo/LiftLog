@@ -58,25 +58,89 @@ struct SplashView: View {
 
 struct MainTabView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @State private var selectedTab = 0
+
+    private let tabs: [(label: String, icon: String, selectedIcon: String)] = [
+        ("Home",     "house",                    "house.fill"),
+        ("Calendar", "calendar",                 "calendar.fill"),
+        ("Plans",    "dumbbell",                 "dumbbell.fill"),
+        ("Stats",    "chart.line.uptrend.xyaxis","chart.line.uptrend.xyaxis"),
+        ("Profile",  "person.crop.circle",       "person.crop.circle.fill"),
+    ]
 
     var body: some View {
-        TabView {
-            HomeView()
-                .tabItem { Label("Home", systemImage: "house.fill") }
+        ZStack(alignment: .bottom) {
+            // Content
+            Group {
+                switch selectedTab {
+                case 0: HomeView()
+                case 1: CalendarView()
+                case 2: WorkoutPlanListView()
+                case 3: StatsView()
+                default: ProfileView()
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-            CalendarView()
-                .tabItem { Label("Calendar", systemImage: "calendar") }
-
-            WorkoutPlanListView()
-                .tabItem { Label("Plans", systemImage: "list.bullet.clipboard.fill") }
-
-            StatsView()
-                .tabItem { Label("Stats", systemImage: "chart.line.uptrend.xyaxis") }
-
-            ProfileView()
-                .tabItem { Label("Profile", systemImage: "person.fill") }
+            // Custom tab bar
+            customTabBar
         }
-        .tint(.brand)
+        .ignoresSafeArea(edges: .bottom)
         .preferredColorScheme(.dark)
+    }
+
+    private var customTabBar: some View {
+        HStack(spacing: 0) {
+            ForEach(tabs.indices, id: \.self) { index in
+                let isSelected = selectedTab == index
+                Button {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                        selectedTab = index
+                    }
+                } label: {
+                    VStack(spacing: 4) {
+                        ZStack {
+                            if isSelected {
+                                // Glow behind selected icon
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.brand.opacity(0.15))
+                                    .frame(width: 48, height: 34)
+                            }
+                            Image(systemName: isSelected ? tabs[index].selectedIcon : tabs[index].icon)
+                                .font(.system(size: 20, weight: isSelected ? .semibold : .regular))
+                                .foregroundStyle(
+                                    isSelected
+                                    ? LinearGradient(colors: [.brand, Color(red: 0.0, green: 0.9, blue: 0.55)],
+                                                     startPoint: .topLeading, endPoint: .bottomTrailing)
+                                    : LinearGradient(colors: [Color.white.opacity(0.4), Color.white.opacity(0.4)],
+                                                     startPoint: .top, endPoint: .bottom)
+                                )
+                                .scaleEffect(isSelected ? 1.08 : 1.0)
+                        }
+                        Text(tabs[index].label)
+                            .font(.system(size: 10, weight: isSelected ? .semibold : .regular))
+                            .foregroundColor(isSelected ? .brand : .white.opacity(0.4))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 10)
+                    .padding(.bottom, 8)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(.bottom, 20) // safe area
+        .background(
+            ZStack {
+                // Frosted dark glass
+                Color(red: 0.06, green: 0.08, blue: 0.07)
+                Rectangle()
+                    .fill(Color.white.opacity(0.04))
+            }
+        )
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(Color.white.opacity(0.07))
+                .frame(height: 1)
+        }
     }
 }

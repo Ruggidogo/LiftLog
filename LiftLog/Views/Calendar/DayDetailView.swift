@@ -102,13 +102,10 @@ struct DayDetailView: View {
 
     private var emptyState: some View {
         VStack(spacing: 16) {
-            ZStack {
-                Circle()
-                    .fill(Color.surface)
-                    .frame(width: 72, height: 72)
-                Image(systemName: isPast ? "moon.zzz.fill" : "calendar.badge.plus")
-                    .font(.system(size: 28))
-                    .foregroundColor(.textSecondary)
+            if isPast {
+                PremiumIcon.purple(systemName: "moon.zzz.fill", size: 72)
+            } else {
+                PremiumIcon.green(systemName: "calendar.badge.plus", size: 72)
             }
             Text(isPast ? "No workout recorded" : "Nothing planned yet")
                 .font(.system(size: 16, weight: .semibold))
@@ -168,14 +165,7 @@ struct DayDetailView: View {
                 showPlanPicker = true
             } label: {
                 HStack(spacing: 14) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.brand.opacity(0.15))
-                            .frame(width: 44, height: 44)
-                        Image(systemName: "list.bullet.clipboard.fill")
-                            .foregroundColor(.brand)
-                            .font(.system(size: 18))
-                    }
+                    PremiumIcon.blue(systemName: "list.bullet.clipboard.fill", size: 44)
                     VStack(alignment: .leading, spacing: 2) {
                         Text("From a plan")
                             .font(.system(size: 15, weight: .semibold))
@@ -202,14 +192,7 @@ struct DayDetailView: View {
                 createQuickSession(planId: nil)
             } label: {
                 HStack(spacing: 14) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.brand.opacity(0.15))
-                            .frame(width: 44, height: 44)
-                        Image(systemName: "bolt.fill")
-                            .foregroundColor(.brand)
-                            .font(.system(size: 18))
-                    }
+                    PremiumIcon.flame(systemName: "bolt.fill", size: 44)
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Quick session")
                             .font(.system(size: 15, weight: .semibold))
@@ -263,14 +246,7 @@ struct DayDetailView: View {
                                     createQuickSession(planId: plan.id)
                                 } label: {
                                     HStack(spacing: 14) {
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .fill(Color.brand.opacity(0.15))
-                                                .frame(width: 44, height: 44)
-                                            Image(systemName: "figure.strengthtraining.traditional")
-                                                .foregroundColor(.brand)
-                                                .font(.system(size: 18))
-                                        }
+                                        PremiumIcon.green(systemName: "figure.strengthtraining.traditional", size: 44)
                                         VStack(alignment: .leading, spacing: 3) {
                                             Text(plan.name)
                                                 .font(.system(size: 15, weight: .semibold))
@@ -340,13 +316,10 @@ struct SessionRowCard: View {
 
     var body: some View {
         HStack(spacing: 14) {
-            ZStack {
-                Circle()
-                    .fill(session.endedAt != nil ? Color.brand.opacity(0.2) : Color.surfaceHigh)
-                    .frame(width: 44, height: 44)
-                Image(systemName: session.endedAt != nil ? "checkmark" : "bolt.fill")
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(session.endedAt != nil ? .brand : .textSecondary)
+            if session.endedAt != nil {
+                PremiumIcon.green(systemName: "checkmark.seal.fill", size: 44)
+            } else {
+                PremiumIcon.flame(systemName: "bolt.fill", size: 44)
             }
 
             VStack(alignment: .leading, spacing: 4) {

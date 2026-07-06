@@ -123,6 +123,90 @@ struct BrandCard<Content: View>: View {
     }
 }
 
+// MARK: - Premium Icon
+
+/// Reusable premium icon: gradient SF Symbol on a glowing rounded-square background.
+struct PremiumIcon: View {
+    let systemName: String
+    var size: CGFloat = 48
+    var colors: [Color] = [.brand, Color(red: 0.0, green: 0.9, blue: 0.6)]
+    var glowOpacity: Double = 0.25
+
+    private var iconSize: CGFloat { size * 0.42 }
+    private var cornerRadius: CGFloat { size * 0.30 }
+
+    var body: some View {
+        ZStack {
+            // Glow layer
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .fill(colors.first ?? .brand)
+                .blur(radius: size * 0.28)
+                .opacity(glowOpacity)
+                .frame(width: size, height: size)
+
+            // Background
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .fill(
+                    LinearGradient(
+                        colors: [colors.first!.opacity(0.22), colors.first!.opacity(0.08)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .stroke(
+                            LinearGradient(
+                                colors: [colors.first!.opacity(0.4), colors.first!.opacity(0.1)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 1
+                        )
+                )
+                .frame(width: size, height: size)
+
+            // Gradient icon
+            Image(systemName: systemName)
+                .font(.system(size: iconSize, weight: .semibold))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: colors,
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+        }
+    }
+}
+
+// MARK: - Icon color presets
+extension PremiumIcon {
+    static func green(systemName: String, size: CGFloat = 48) -> PremiumIcon {
+        PremiumIcon(systemName: systemName, size: size,
+                    colors: [.brand, Color(red: 0.0, green: 0.9, blue: 0.55)])
+    }
+    static func flame(systemName: String, size: CGFloat = 48) -> PremiumIcon {
+        PremiumIcon(systemName: systemName, size: size,
+                    colors: [Color(red: 1.0, green: 0.55, blue: 0.1), Color(red: 1.0, green: 0.85, blue: 0.2)],
+                    glowOpacity: 0.3)
+    }
+    static func blue(systemName: String, size: CGFloat = 48) -> PremiumIcon {
+        PremiumIcon(systemName: systemName, size: size,
+                    colors: [Color(red: 0.35, green: 0.55, blue: 1.0), Color(red: 0.6, green: 0.8, blue: 1.0)])
+    }
+    static func purple(systemName: String, size: CGFloat = 48) -> PremiumIcon {
+        PremiumIcon(systemName: systemName, size: size,
+                    colors: [Color(red: 0.7, green: 0.35, blue: 1.0), Color(red: 0.9, green: 0.6, blue: 1.0)],
+                    glowOpacity: 0.28)
+    }
+    static func rose(systemName: String, size: CGFloat = 48) -> PremiumIcon {
+        PremiumIcon(systemName: systemName, size: size,
+                    colors: [Color(red: 1.0, green: 0.3, blue: 0.5), Color(red: 1.0, green: 0.6, blue: 0.7)],
+                    glowOpacity: 0.25)
+    }
+}
+
 // MARK: - Section Header
 struct SectionHeader: View {
     let title: String
