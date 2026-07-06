@@ -53,6 +53,8 @@
 		000000000000000000000078 = {isa = PBXBuildFile; productRef = 000000000000000000000077; };
 		00000000000000000000007A = {isa = PBXBuildFile; productRef = 000000000000000000000079; };
 		000000000000000000000081 = {isa = PBXBuildFile; fileRef = 000000000000000000000080; };
+		000000000000000000000087 = {isa = PBXBuildFile; fileRef = 000000000000000000000086; };
+		000000000000000000000089 = {isa = PBXBuildFile; fileRef = 000000000000000000000088; };
 		000000000000000000000085 = {isa = PBXBuildFile; fileRef = 000000000000000000000084; };
 /* End PBXBuildFile section */
 
@@ -103,6 +105,8 @@
 		000000000000000000000053 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DateHelper.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		000000000000000000000055 = {isa = PBXFileReference; lastKnownFileType = text.plist.xcstrings; name = Localizable.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		000000000000000000000080 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingView.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		000000000000000000000086 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GifView.swift; path = GifView.swift; sourceTree = "<group>"; };
+		000000000000000000000088 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExerciseGifMapper.swift; path = ExerciseGifMapper.swift; sourceTree = "<group>"; };
 		000000000000000000000084 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DesignSystem.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -288,6 +292,8 @@
 				000000000000000000000051,
 				000000000000000000000053,
 				000000000000000000000084,
+				000000000000000000000086,
+				000000000000000000000088,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -422,6 +428,8 @@
 				000000000000000000000054,
 				000000000000000000000081,
 				000000000000000000000085,
+				000000000000000000000087,
+				000000000000000000000089,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

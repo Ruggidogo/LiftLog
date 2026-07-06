@@ -1,11 +1,57 @@
 import Foundation
 import SwiftUI
 
+enum MuscleGroupFilter: String, CaseIterable, Identifiable {
+    case all       = "All"
+    case chest     = "Chest"
+    case back      = "Back"
+    case shoulders = "Shoulders"
+    case arms      = "Arms"
+    case legs      = "Legs"
+    case core      = "Core"
+    case fullBody  = "Full Body"
+
+    var id: String { rawValue }
+
+    var icon: String {
+        switch self {
+        case .all:       return "square.grid.2x2.fill"
+        case .chest:     return "figure.arms.open"
+        case .back:      return "figure.walk"
+        case .shoulders: return "figure.wrestling"
+        case .arms:      return "dumbbell.fill"
+        case .legs:      return "figure.run"
+        case .core:      return "bolt.heart.fill"
+        case .fullBody:  return "figure.strengthtraining.traditional"
+        }
+    }
+
+    var keywords: [String] {
+        switch self {
+        case .all:       return []
+        case .chest:     return ["Chest", "Pecs"]
+        case .back:      return ["Back", "Lats", "Traps", "Rhomboids", "Rear Deltoid"]
+        case .shoulders: return ["Shoulders", "Deltoids", "Rotator"]
+        case .arms:      return ["Biceps", "Triceps", "Forearms", "Brachialis"]
+        case .legs:      return ["Quads", "Hamstrings", "Glutes", "Calves", "Hip Flexors", "Adductors"]
+        case .core:      return ["Core", "Abs", "Obliques", "Lower Back"]
+        case .fullBody:  return ["Full Body"]
+        }
+    }
+
+    func matches(muscleGroups: [String]) -> Bool {
+        guard self != .all else { return true }
+        return muscleGroups.contains { muscle in
+            keywords.contains { muscle.localizedCaseInsensitiveContains($0) }
+        }
+    }
+}
+
 @MainActor
 final class ExerciseLibraryViewModel: ObservableObject {
     @Published var exercises: [Exercise] = []
     @Published var searchText: String = ""
-    @Published var selectedCategory: ExerciseCategory? = nil
+    @Published var selectedMuscleGroup: MuscleGroupFilter = .all
     @Published var isLoading = false
     @Published var error: AppError?
 
@@ -14,8 +60,8 @@ final class ExerciseLibraryViewModel: ObservableObject {
             let matchesSearch = searchText.isEmpty ||
                 exercise.name.localizedCaseInsensitiveContains(searchText) ||
                 exercise.muscleGroups.joined(separator: " ").localizedCaseInsensitiveContains(searchText)
-            let matchesCategory = selectedCategory == nil || exercise.category == selectedCategory
-            return matchesSearch && matchesCategory
+            let matchesMuscle = selectedMuscleGroup.matches(muscleGroups: exercise.muscleGroups)
+            return matchesSearch && matchesMuscle
         }
     }
 
@@ -24,9 +70,7 @@ final class ExerciseLibraryViewModel: ObservableObject {
         defer { isLoading = false }
         do {
             exercises = try await ExerciseService.shared.fetchExercises(forUser: userId)
-            if exercises.isEmpty {
-                exercises = ExerciseService.seedExercises
-            }
+            if exercises.isEmpty { exercises = ExerciseService.seedExercises }
         } catch {
             exercises = ExerciseService.seedExercises
         }

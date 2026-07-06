@@ -8,24 +8,37 @@ struct WorkoutPlanListView: View {
 
     var body: some View {
         NavigationStack {
-            Group {
-                if viewModel.isLoading && viewModel.plans.isEmpty {
-                    ProgressView()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else if viewModel.plans.isEmpty {
-                    emptyState
-                } else {
-                    plansList
+            ZStack {
+                Color.brandDeep.ignoresSafeArea()
+
+                Group {
+                    if viewModel.isLoading && viewModel.plans.isEmpty {
+                        ProgressView().tint(.brand)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    } else if viewModel.plans.isEmpty {
+                        emptyState
+                    } else {
+                        plansList
+                    }
                 }
             }
-            .navigationTitle(String(localized: "plans.title"))
+            .navigationTitle("My Plans")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
                         editingPlan = nil
                         showBuilder = true
                     } label: {
-                        Image(systemName: "plus")
+                        ZStack {
+                            Circle()
+                                .fill(Color.brand.opacity(0.15))
+                                .frame(width: 36, height: 36)
+                            Image(systemName: "plus")
+                                .font(.system(size: 15, weight: .semibold))
+                                .foregroundColor(.brand)
+                        }
                     }
                 }
             }
@@ -35,85 +48,176 @@ struct WorkoutPlanListView: View {
                 }
             }
             .sheet(isPresented: $showBuilder) {
-                WorkoutPlanBuilderView(
-                    viewModel: viewModel,
-                    existingPlan: editingPlan
-                )
+                WorkoutPlanBuilderView(viewModel: viewModel, existingPlan: editingPlan)
             }
         }
         .errorAlert(error: $viewModel.error)
     }
 
-    private var emptyState: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "list.bullet.clipboard")
-                .font(.system(size: 56))
-                .foregroundColor(.secondary)
-            Text(String(localized: "plans.empty.title"))
-                .font(.title3.bold())
-            Text(String(localized: "plans.empty.subtitle"))
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-            Button {
-                showBuilder = true
-            } label: {
-                Text(String(localized: "plans.create_first"))
-            }
-            .buttonStyle(.borderedProminent)
-        }
-        .padding(40)
-    }
+    // MARK: - Plans List
 
     private var plansList: some View {
-        List {
-            ForEach(viewModel.plans) { plan in
-                PlanRowView(plan: plan) {
-                    editingPlan = plan
-                    showBuilder = true
-                }
-                .swipeActions(edge: .trailing) {
-                    Button(role: .destructive) {
+        ScrollView {
+            VStack(spacing: 14) {
+                ForEach(viewModel.plans) { plan in
+                    PlanCard(plan: plan) {
+                        editingPlan = plan
+                        showBuilder = true
+                    } onDelete: {
                         Task { await viewModel.deletePlan(plan) }
-                    } label: {
-                        Label(String(localized: "button.delete"), systemImage: "trash")
                     }
                 }
             }
+            .padding(.horizontal, 20)
+            .padding(.top, 8)
+            .padding(.bottom, 40)
         }
-        .listStyle(.plain)
+    }
+
+    // MARK: - Empty State
+
+    private var emptyState: some View {
+        VStack(spacing: 20) {
+            PremiumIcon.blue(systemName: "list.bullet.clipboard.fill", size: 72)
+
+            VStack(spacing: 8) {
+                Text("No plans yet")
+                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                    .foregroundColor(.textPrimary)
+                Text("Build your first workout plan\nand start training smarter.")
+                    .font(.subheadline)
+                    .foregroundColor(.textSecondary)
+                    .multilineTextAlignment(.center)
+            }
+
+            BrandButton(title: "Create My First Plan") {
+                showBuilder = true
+            }
+            .padding(.horizontal, 40)
+            .padding(.top, 8)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.bottom, 60)
     }
 }
 
-struct PlanRowView: View {
+// MARK: - Plan Card
+
+struct PlanCard: View {
     let plan: WorkoutPlan
     let onEdit: () -> Void
+    let onDelete: () -> Void
+
+    @State private var showDeleteConfirm = false
+
+    private var goalGradient: [Color] {
+        switch plan.goal {
+        case .strength:    return [Color(red: 0.13, green: 0.75, blue: 0.43), Color(red: 0, green: 0.9, blue: 0.55)]
+        case .hypertrophy: return [Color(red: 0.4, green: 0.55, blue: 1.0), Color(red: 0.6, green: 0.8, blue: 1.0)]
+        case .endurance:   return [Color(red: 1.0, green: 0.55, blue: 0.1), Color(red: 1.0, green: 0.85, blue: 0.2)]
+        case .weightLoss:  return [Color(red: 1.0, green: 0.3, blue: 0.5), Color(red: 1.0, green: 0.6, blue: 0.7)]
+        case .mixed:       return [Color(red: 0.7, green: 0.35, blue: 1.0), Color(red: 0.9, green: 0.6, blue: 1.0)]
+        }
+    }
 
     var body: some View {
         Button(action: onEdit) {
-            HStack(spacing: 14) {
-                Image(systemName: plan.goal.icon)
-                    .font(.title2)
-                    .foregroundColor(.accentColor)
-                    .frame(width: 44, height: 44)
-                    .background(Color.accentColor.opacity(0.1))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+            VStack(alignment: .leading, spacing: 0) {
+                // Top: gradient accent bar
+                LinearGradient(colors: goalGradient, startPoint: .leading, endPoint: .trailing)
+                    .frame(height: 3)
+                    .clipShape(RoundedRectangle(cornerRadius: 2))
+                    .padding(.horizontal, 16)
+                    .padding(.top, 16)
 
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(plan.name)
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                    Text(plan.goal.displayName)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                HStack(alignment: .top, spacing: 14) {
+                    // Icon
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 14)
+                            .fill(
+                                LinearGradient(colors: [goalGradient[0].opacity(0.2), goalGradient[0].opacity(0.07)],
+                                               startPoint: .topLeading, endPoint: .bottomTrailing)
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 14)
+                                    .stroke(goalGradient[0].opacity(0.35), lineWidth: 1)
+                            )
+                            .frame(width: 52, height: 52)
+
+                        Image(systemName: plan.goal.icon)
+                            .font(.system(size: 22, weight: .semibold))
+                            .foregroundStyle(
+                                LinearGradient(colors: goalGradient, startPoint: .topLeading, endPoint: .bottomTrailing)
+                            )
+                    }
+
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(plan.name)
+                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                            .foregroundColor(.textPrimary)
+                            .lineLimit(1)
+
+                        // Goal badge
+                        Text(plan.goal.displayName.uppercased())
+                            .font(.system(size: 10, weight: .bold))
+                            .foregroundStyle(
+                                LinearGradient(colors: goalGradient, startPoint: .leading, endPoint: .trailing)
+                            )
+                            .tracking(1.0)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                            .background(goalGradient[0].opacity(0.12))
+                            .clipShape(Capsule())
+                    }
+
+                    Spacer()
+
+                    // Chevron + delete
+                    VStack(spacing: 8) {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(.textSecondary)
+
+                        Button {
+                            showDeleteConfirm = true
+                        } label: {
+                            Image(systemName: "trash")
+                                .font(.system(size: 13))
+                                .foregroundColor(.textSecondary.opacity(0.6))
+                        }
+                        .buttonStyle(.plain)
+                    }
                 }
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.secondary)
-                    .font(.caption)
+                .padding(.horizontal, 16)
+                .padding(.top, 14)
+
+                // Footer: creation date
+                HStack {
+                    Image(systemName: "calendar")
+                        .font(.system(size: 11))
+                        .foregroundColor(.textSecondary.opacity(0.6))
+                    Text("Created \(plan.createdAt, style: .date)")
+                        .font(.system(size: 12))
+                        .foregroundColor(.textSecondary.opacity(0.6))
+                    Spacer()
+                    Text("Edit plan →")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(goalGradient[0])
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 12)
+                .padding(.bottom, 16)
             }
-            .padding(.vertical, 4)
+            .background(Color.surface)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.divider, lineWidth: 1))
         }
         .buttonStyle(.plain)
+        .confirmationDialog("Delete this plan?", isPresented: $showDeleteConfirm, titleVisibility: .visible) {
+            Button("Delete", role: .destructive, action: onDelete)
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This action cannot be undone.")
+        }
     }
 }
