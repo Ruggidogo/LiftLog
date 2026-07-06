@@ -10,21 +10,27 @@ struct CalendarView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                viewToggle
-                    .padding(.horizontal, 20)
-                    .padding(.top, 8)
+            ZStack {
+                Color.brandDeep.ignoresSafeArea()
 
-                if viewModel.isWeekView {
-                    weekView
-                } else {
-                    monthView
+                VStack(spacing: 0) {
+                    viewToggle
+                        .padding(.horizontal, 20)
+                        .padding(.top, 8)
+                        .padding(.bottom, 4)
+
+                    if viewModel.isWeekView {
+                        weekView
+                    } else {
+                        monthView
+                    }
+
+                    upcomingList
                 }
-
-                Divider()
-                upcomingList
             }
-            .navigationTitle(String(localized: "tab.calendar"))
+            .navigationTitle("Calendar")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbarColorScheme(.dark, for: .navigationBar)
             .task {
                 if let userId = authViewModel.currentUser?.id {
                     await viewModel.load(userId: userId)
@@ -39,46 +45,81 @@ struct CalendarView: View {
     }
 
     private var viewToggle: some View {
-        Picker(String(localized: "calendar.view"), selection: $viewModel.isWeekView) {
-            Text(String(localized: "calendar.month")).tag(false)
-            Text(String(localized: "calendar.week")).tag(true)
+        HStack(spacing: 0) {
+            ForEach(["Month", "Week"], id: \.self) { label in
+                let isWeek = label == "Week"
+                let isActive = viewModel.isWeekView == isWeek
+                Button {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        viewModel.isWeekView = isWeek
+                    }
+                } label: {
+                    Text(label)
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(isActive ? .black : .textSecondary)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 8)
+                        .background(isActive ? Color.brand : Color.clear)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                }
+                .buttonStyle(.plain)
+            }
         }
-        .pickerStyle(.segmented)
-        .padding(.bottom, 12)
+        .padding(4)
+        .background(Color.surface)
+        .clipShape(RoundedRectangle(cornerRadius: 13))
+        .overlay(RoundedRectangle(cornerRadius: 13).stroke(Color.divider, lineWidth: 1))
+        .padding(.bottom, 8)
     }
+
+    // MARK: - Month View
 
     private var monthView: some View {
         VStack(spacing: 0) {
+            // Month navigation
             HStack {
                 Button { viewModel.previousMonth() } label: {
                     Image(systemName: "chevron.left")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.brand)
+                        .frame(width: 36, height: 36)
+                        .background(Color.surface)
+                        .clipShape(Circle())
                 }
                 Spacer()
                 Text(viewModel.currentMonthTitle)
-                    .font(.headline)
+                    .font(.system(size: 17, weight: .bold))
+                    .foregroundColor(.textPrimary)
                 Spacer()
                 Button { viewModel.nextMonth() } label: {
                     Image(systemName: "chevron.right")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.brand)
+                        .frame(width: 36, height: 36)
+                        .background(Color.surface)
+                        .clipShape(Circle())
                 }
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 12)
 
+            // Weekday headers
             HStack(spacing: 0) {
                 ForEach(weekdaySymbols, id: \.self) { day in
                     Text(day)
-                        .font(.caption2)
-                        .foregroundColor(.secondary)
+                        .font(.system(size: 11, weight: .medium))
+                        .foregroundColor(.textSecondary)
                         .frame(maxWidth: .infinity)
                 }
             }
             .padding(.horizontal, 4)
-            .padding(.bottom, 4)
+            .padding(.bottom, 8)
 
-            let columns = Array(repeating: GridItem(.flexible(), spacing: 4), count: 7)
-            LazyVGrid(columns: columns, spacing: 4) {
+            // Day grid
+            let columns = Array(repeating: GridItem(.flexible(), spacing: 2), count: 7)
+            LazyVGrid(columns: columns, spacing: 2) {
                 ForEach(0..<viewModel.firstWeekdayOffset, id: \.self) { _ in
-                    Color.clear.frame(height: 40)
+                    Color.clear.frame(height: 44)
                 }
                 ForEach(viewModel.daysInCurrentMonth, id: \.self) { date in
                     CalendarDayCell(
@@ -97,8 +138,46 @@ struct CalendarView: View {
         }
     }
 
+    // MARK: - Week View
+
     private var weekView: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
+        VStack(spacing: 0) {
+            // Week navigation header
+            HStack {
+                Button {
+                    withAnimation {
+                        viewModel.selectedDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: viewModel.selectedDate) ?? viewModel.selectedDate
+                    }
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.brand)
+                        .frame(width: 36, height: 36)
+                        .background(Color.surface)
+                        .clipShape(Circle())
+                }
+                Spacer()
+                Text(weekRangeTitle)
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundColor(.textPrimary)
+                Spacer()
+                Button {
+                    withAnimation {
+                        viewModel.selectedDate = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: viewModel.selectedDate) ?? viewModel.selectedDate
+                    }
+                } label: {
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.brand)
+                        .frame(width: 36, height: 36)
+                        .background(Color.surface)
+                        .clipShape(Circle())
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 12)
+
+            // Day strip
             HStack(spacing: 8) {
                 ForEach(viewModel.weekDays, id: \.self) { date in
                     WeekDayCell(
@@ -113,48 +192,131 @@ struct CalendarView: View {
                 }
             }
             .padding(.horizontal, 20)
-            .padding(.vertical, 12)
+            .padding(.bottom, 16)
         }
     }
 
+    private var weekRangeTitle: String {
+        let days = viewModel.weekDays
+        guard let first = days.first, let last = days.last else { return "" }
+        let fmt = DateFormatter()
+        fmt.dateFormat = "MMM d"
+        return "\(fmt.string(from: first)) – \(fmt.string(from: last))"
+    }
+
+    // MARK: - Upcoming
+
     private var upcomingList: some View {
-        Group {
-            let upcoming = viewModel.sessions
-                .filter { $0.scheduledDate >= Date().startOfDay && $0.endedAt == nil }
-                .sorted { $0.scheduledDate < $1.scheduledDate }
-                .prefix(5)
+        let upcoming = viewModel.sessions
+            .filter { $0.scheduledDate >= Date().startOfDay && $0.endedAt == nil }
+            .sorted { $0.scheduledDate < $1.scheduledDate }
+            .prefix(6)
+
+        return VStack(alignment: .leading, spacing: 0) {
+            Rectangle()
+                .fill(Color.divider)
+                .frame(height: 1)
+                .padding(.bottom, 16)
 
             if upcoming.isEmpty {
-                VStack(spacing: 8) {
-                    Image(systemName: "calendar.badge.exclamationmark")
-                        .font(.title)
-                        .foregroundColor(.secondary)
-                    Text(String(localized: "calendar.no_upcoming"))
-                        .foregroundColor(.secondary)
-                        .font(.subheadline)
+                VStack(spacing: 10) {
+                    ZStack {
+                        Circle()
+                            .fill(Color.surface)
+                            .frame(width: 60, height: 60)
+                        Image(systemName: "calendar.badge.plus")
+                            .font(.system(size: 26))
+                            .foregroundColor(.textSecondary)
+                    }
+                    Text("No upcoming sessions")
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundColor(.textSecondary)
+                    Text("Tap any day to plan a workout")
+                        .font(.caption)
+                        .foregroundColor(.textSecondary.opacity(0.7))
                 }
                 .frame(maxWidth: .infinity)
-                .padding(40)
+                .padding(.vertical, 32)
             } else {
-                List(Array(upcoming)) { session in
+                VStack(alignment: .leading, spacing: 0) {
                     HStack {
-                        Circle()
-                            .fill(Color.accentColor)
-                            .frame(width: 8, height: 8)
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(session.scheduledDate, style: .date)
-                                .font(.subheadline.bold())
-                            Text(session.notes.isEmpty ? String(localized: "session.no_notes") : session.notes)
-                                .font(.caption)
-                                .foregroundColor(.secondary)
+                        Text("Upcoming")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(.textSecondary)
+                            .tracking(0.8)
+                        Spacer()
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 10)
+
+                    VStack(spacing: 8) {
+                        ForEach(Array(upcoming)) { session in
+                            UpcomingSessionRow(session: session)
+                                .padding(.horizontal, 20)
+                                .onTapGesture {
+                                    selectedDate = session.scheduledDate
+                                    showDayDetail = true
+                                }
                         }
                     }
                 }
-                .listStyle(.plain)
             }
         }
     }
 }
+
+// MARK: - Upcoming Row
+
+struct UpcomingSessionRow: View {
+    let session: Session
+
+    private var daysUntil: Int {
+        Calendar.current.dateComponents([.day], from: Date().startOfDay, to: session.scheduledDate.startOfDay).day ?? 0
+    }
+
+    private var daysLabel: String {
+        switch daysUntil {
+        case 0: return "Today"
+        case 1: return "Tomorrow"
+        default: return "In \(daysUntil) days"
+        }
+    }
+
+    var body: some View {
+        HStack(spacing: 12) {
+            RoundedRectangle(cornerRadius: 4)
+                .fill(Color.brand)
+                .frame(width: 4, height: 40)
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(session.notes.isEmpty ? "Workout" : session.notes)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.textPrimary)
+                Text(session.scheduledDate, style: .date)
+                    .font(.system(size: 12))
+                    .foregroundColor(.textSecondary)
+            }
+
+            Spacer()
+
+            Text(daysLabel)
+                .font(.system(size: 12, weight: .medium))
+                .foregroundColor(daysUntil == 0 ? .brand : .textSecondary)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .background((daysUntil == 0 ? Color.brand : Color.surface).opacity(daysUntil == 0 ? 0.15 : 1))
+                .clipShape(Capsule())
+                .overlay(Capsule().stroke(Color.divider, lineWidth: daysUntil == 0 ? 0 : 1))
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
+        .background(Color.surface)
+        .clipShape(RoundedRectangle(cornerRadius: 14))
+        .overlay(RoundedRectangle(cornerRadius: 14).stroke(Color.divider, lineWidth: 1))
+    }
+}
+
+// MARK: - Month Day Cell
 
 struct CalendarDayCell: View {
     let date: Date
@@ -164,28 +326,35 @@ struct CalendarDayCell: View {
     let action: () -> Void
 
     private var day: String {
-        let c = Calendar.current.component(.day, from: date)
-        return "\(c)"
+        "\(Calendar.current.component(.day, from: date))"
     }
 
     var body: some View {
         Button(action: action) {
             VStack(spacing: 4) {
-                Text(day)
-                    .font(.system(size: 14, weight: isToday ? .bold : .regular))
-                    .foregroundColor(isSelected ? .white : (isToday ? .accentColor : .primary))
-                    .frame(width: 32, height: 32)
-                    .background(isSelected ? Color.accentColor : Color.clear)
-                    .clipShape(Circle())
+                ZStack {
+                    if isSelected {
+                        Circle().fill(Color.brand).frame(width: 34, height: 34)
+                    } else if isToday {
+                        Circle().stroke(Color.brand, lineWidth: 1.5).frame(width: 34, height: 34)
+                    }
+                    Text(day)
+                        .font(.system(size: 14, weight: isToday || isSelected ? .bold : .regular))
+                        .foregroundColor(isSelected ? .black : (isToday ? .brand : .textPrimary))
+                }
+                .frame(width: 34, height: 34)
 
                 Circle()
-                    .fill(hasSession ? Color.accentColor : Color.clear)
+                    .fill(hasSession ? (isSelected ? Color.black.opacity(0.5) : Color.brand) : Color.clear)
                     .frame(width: 5, height: 5)
             }
+            .frame(height: 48)
         }
         .buttonStyle(.plain)
     }
 }
+
+// MARK: - Week Day Cell
 
 struct WeekDayCell: View {
     let date: Date
@@ -198,19 +367,28 @@ struct WeekDayCell: View {
         Button(action: action) {
             VStack(spacing: 6) {
                 Text(date.weekdaySymbol)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                let day = Calendar.current.component(.day, from: date)
-                Text("\(day)")
-                    .font(.headline)
-                    .foregroundColor(isSelected ? .white : (isToday ? .accentColor : .primary))
-                    .frame(width: 44, height: 44)
-                    .background(isSelected ? Color.accentColor : Color(.secondarySystemBackground))
-                    .clipShape(Circle())
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(isSelected ? .brand : .textSecondary)
+
+                ZStack {
+                    Circle()
+                        .fill(isSelected ? Color.brand : (isToday ? Color.brand.opacity(0.15) : Color.surface))
+                        .frame(width: 40, height: 40)
+                    if isToday && !isSelected {
+                        Circle()
+                            .stroke(Color.brand, lineWidth: 1.5)
+                            .frame(width: 40, height: 40)
+                    }
+                    Text("\(Calendar.current.component(.day, from: date))")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(isSelected ? .black : (isToday ? .brand : .textPrimary))
+                }
+
                 Circle()
-                    .fill(hasSession ? Color.accentColor : Color.clear)
-                    .frame(width: 6, height: 6)
+                    .fill(hasSession ? Color.brand : Color.clear)
+                    .frame(width: 5, height: 5)
             }
+            .frame(maxWidth: .infinity)
         }
         .buttonStyle(.plain)
     }
