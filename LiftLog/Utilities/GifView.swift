@@ -20,6 +20,7 @@ struct GifView: UIViewRepresentable {
     }
 
     func updateUIView(_ web: WKWebView, context: Context) {
+        guard web.url == nil else { return }
         let html = """
         <!DOCTYPE html>
         <html>
@@ -27,11 +28,12 @@ struct GifView: UIViewRepresentable {
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <style>
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { background: transparent; display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
-        img { width:100%; height:100%; object-fit:cover; }
+        body { background: transparent; display:flex; align-items:center; justify-content:center; width:100%; height:100%; overflow:hidden; }
+        img { width:100%; height:100%; object-fit:cover; display:block; }
+        img.error { display:none; }
         </style>
         </head>
-        <body><img src="\(url.absoluteString)"></body>
+        <body><img src="\(url.absoluteString)" onerror="this.classList.add('error')"></body>
         </html>
         """
         web.loadHTMLString(html, baseURL: nil)

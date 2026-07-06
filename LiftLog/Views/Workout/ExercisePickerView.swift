@@ -6,6 +6,7 @@ struct ExercisePickerView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject private var viewModel = ExerciseLibraryViewModel()
     @Environment(\.dismiss) var dismiss
+    @State private var previewExercise: Exercise?
 
     var body: some View {
         NavigationStack {
@@ -30,6 +31,12 @@ struct ExercisePickerView: View {
             .task {
                 if let userId = authViewModel.currentUser?.id {
                     await viewModel.load(userId: userId)
+                }
+            }
+            .sheet(item: $previewExercise) { exercise in
+                ExercisePreviewSheet(exercise: exercise) {
+                    onSelect(exercise)
+                    dismiss()
                 }
             }
         }
@@ -92,8 +99,7 @@ struct ExercisePickerView: View {
                     LazyVStack(spacing: 10) {
                         ForEach(viewModel.filtered) { exercise in
                             ExercisePickerRow(exercise: exercise) {
-                                onSelect(exercise)
-                                dismiss()
+                                previewExercise = exercise
                             }
                         }
                     }
@@ -101,6 +107,145 @@ struct ExercisePickerView: View {
                     .padding(.bottom, 30)
                 }
             }
+        }
+    }
+}
+
+// MARK: - Exercise Preview Sheet
+
+struct ExercisePreviewSheet: View {
+    let exercise: Exercise
+    let onAdd: () -> Void
+
+    @Environment(\.dismiss) var dismiss
+    @State private var gifUrl: URL? = nil
+
+    var body: some View {
+        ZStack {
+            Color.brandDeep.ignoresSafeArea()
+
+            VStack(spacing: 0) {
+                // Drag handle
+                Capsule()
+                    .fill(Color.divider)
+                    .frame(width: 36, height: 4)
+                    .padding(.top, 12)
+                    .padding(.bottom, 20)
+
+                ScrollView {
+                    VStack(spacing: 20) {
+                        // GIF / placeholder
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(Color.surfaceHigh)
+
+                            if let url = gifUrl {
+                                GifView(url: url)
+                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                            } else {
+                                Image(systemName: exercise.category.icon)
+                                    .font(.system(size: 64, weight: .semibold))
+                                    .foregroundStyle(
+                                        LinearGradient(colors: [.brand, Color(red: 0, green: 0.9, blue: 0.55)],
+                                                       startPoint: .topLeading, endPoint: .bottomTrailing)
+                                    )
+                            }
+                        }
+                        .frame(height: 260)
+                        .padding(.horizontal, 20)
+
+                        // Name
+                        Text(exercise.name)
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                            .foregroundColor(.textPrimary)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 20)
+
+                        // Muscle group pills
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 8) {
+                                ForEach(exercise.muscleGroups, id: \.self) { muscle in
+                                    Text(muscle)
+                                        .font(.system(size: 13, weight: .semibold))
+                                        .foregroundColor(.brand)
+                                        .padding(.horizontal, 14)
+                                        .padding(.vertical, 7)
+                                        .background(Color.brand.opacity(0.12))
+                                        .clipShape(Capsule())
+                                        .overlay(Capsule().stroke(Color.brand.opacity(0.3), lineWidth: 1))
+                                }
+                            }
+                            .padding(.horizontal, 20)
+                        }
+
+                        // Equipment row
+                        if !exercise.equipment.isEmpty {
+                            HStack(spacing: 8) {
+                                Image(systemName: "wrench.and.screwdriver")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.textSecondary)
+                                Text(exercise.equipment)
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.textSecondary)
+                                Spacer()
+                            }
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 12)
+                            .background(Color.surface)
+                            .clipShape(RoundedRectangle(cornerRadius: 14))
+                            .overlay(RoundedRectangle(cornerRadius: 14).stroke(Color.divider, lineWidth: 1))
+                            .padding(.horizontal, 20)
+                        }
+                    }
+                    .padding(.bottom, 24)
+                }
+
+                // Add button
+                VStack(spacing: 12) {
+                    Divider().background(Color.divider)
+                    HStack(spacing: 12) {
+                        Button {
+                            dismiss()
+                        } label: {
+                            Text("Cancel")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(.textSecondary)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 16)
+                                .background(Color.surface)
+                                .clipShape(RoundedRectangle(cornerRadius: 14))
+                                .overlay(RoundedRectangle(cornerRadius: 14).stroke(Color.divider, lineWidth: 1))
+                        }
+                        .buttonStyle(.plain)
+
+                        Button(action: onAdd) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "plus.circle.fill")
+                                    .font(.system(size: 18))
+                                Text("Add to Workout")
+                                    .font(.system(size: 16, weight: .bold))
+                            }
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 16)
+                            .background(
+                                LinearGradient(colors: [.brand, Color(red: 0, green: 0.9, blue: 0.55)],
+                                               startPoint: .leading, endPoint: .trailing)
+                            )
+                            .clipShape(RoundedRectangle(cornerRadius: 14))
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 32)
+                }
+                .background(Color.brandDeep)
+            }
+        }
+        .presentationDetents([.medium, .large])
+        .presentationDragIndicator(.hidden)
+        .task {
+            gifUrl = ExerciseGifMapper.url(for: exercise.name)
         }
     }
 }
