@@ -101,7 +101,7 @@
 		00000000000000000000004F = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Constants.swift; sourceTree = "<group>"; };
 		000000000000000000000051 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		000000000000000000000053 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DateHelper.swift; path = DateHelper.swift; sourceTree = "<group>"; };
-		000000000000000000000055 = {isa = PBXFileReference; lastKnownFileType = text; name = Localizable.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		000000000000000000000055 = {isa = PBXFileReference; lastKnownFileType = text.plist.xcstrings; name = Localizable.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		000000000000000000000080 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingView.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		000000000000000000000084 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DesignSystem.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */

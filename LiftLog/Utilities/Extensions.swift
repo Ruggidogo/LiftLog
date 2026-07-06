@@ -14,9 +14,9 @@ extension View {
             set: { if !$0 { error.wrappedValue = nil } }
         )) {
             Alert(
-                title: Text(String(localized: "error.title")),
+                title: Text("Error"),
                 message: Text(error.wrappedValue?.localizedDescription ?? ""),
-                dismissButton: .default(Text(String(localized: "button.ok")))
+                dismissButton: .default(Text("OK"))
             )
         }
     }

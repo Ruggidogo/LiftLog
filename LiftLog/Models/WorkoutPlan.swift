@@ -29,11 +29,11 @@ enum WorkoutGoal: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .strength: return String(localized: "goal.strength")
-        case .hypertrophy: return String(localized: "goal.hypertrophy")
-        case .endurance: return String(localized: "goal.endurance")
-        case .weightLoss: return String(localized: "goal.weight_loss")
-        case .mixed: return String(localized: "goal.mixed")
+        case .strength: return "Strength"
+        case .hypertrophy: return "Hypertrophy"
+        case .endurance: return "Endurance"
+        case .weightLoss: return "Weight Loss"
+        case .mixed: return "Mixed"
         }
     }
 
