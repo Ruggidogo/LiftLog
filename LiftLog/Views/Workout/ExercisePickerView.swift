@@ -171,24 +171,3 @@ struct ExercisePickerRow: View {
     }
 }
 
-// MARK: - Filter Chip (legacy, kept for other views)
-
-struct FilterChip: View {
-    let title: String
-    let isSelected: Bool
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            Text(title)
-                .font(.system(size: 13, weight: .semibold))
-                .foregroundColor(isSelected ? .black : .textSecondary)
-                .padding(.horizontal, 14)
-                .padding(.vertical, 8)
-                .background(isSelected ? Color.brand : Color.surface)
-                .clipShape(Capsule())
-                .overlay(Capsule().stroke(isSelected ? Color.clear : Color.divider, lineWidth: 1))
-        }
-        .buttonStyle(.plain)
-    }
-}
