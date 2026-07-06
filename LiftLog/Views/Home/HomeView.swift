@@ -6,8 +6,34 @@ struct HomeView: View {
     @State private var showActiveSession = false
     @State private var activeSession: Session?
     @State private var activePlanExercises: [PlanExercise] = []
+    @State private var selectedWeekDay: Date?
 
     private var todaySessions: [Session] { calendarVM.sessionsFor(date: Date()) }
+
+    private var monthSessionCount: Int {
+        let calendar = Calendar.current
+        let now = Date()
+        return calendarVM.sessions.filter {
+            $0.endedAt != nil &&
+            calendar.component(.month, from: $0.scheduledDate) == calendar.component(.month, from: now) &&
+            calendar.component(.year, from: $0.scheduledDate) == calendar.component(.year, from: now)
+        }.count
+    }
+
+    private var currentStreak: Int {
+        let calendar = Calendar.current
+        var streak = 0
+        var checkDate = Date().startOfDay
+        while true {
+            if calendarVM.sessionsFor(date: checkDate).contains(where: { $0.endedAt != nil }) {
+                streak += 1
+                checkDate = calendar.date(byAdding: .day, value: -1, to: checkDate) ?? checkDate
+            } else {
+                break
+            }
+        }
+        return streak
+    }
 
     var body: some View {
         NavigationStack {
@@ -17,6 +43,7 @@ struct HomeView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 24) {
                         greetingSection
+                        statsRow
                         todayCard
                         weeklyStreakSection
                         quickActionsSection
@@ -56,10 +83,37 @@ struct HomeView: View {
         .padding(.top, 56)
     }
 
+    private var statsRow: some View {
+        HStack(spacing: 12) {
+            StatPill(
+                value: "\(currentStreak)",
+                label: currentStreak == 1 ? "Day Streak" : "Day Streak",
+                icon: "flame.fill",
+                iconColor: Color(red: 1.0, green: 0.55, blue: 0.2)
+            )
+            StatPill(
+                value: "\(monthSessionCount)",
+                label: "This Month",
+                icon: "calendar.badge.checkmark",
+                iconColor: .brand
+            )
+        }
+    }
+
     private var todayCard: some View {
         Group {
             if todaySessions.isEmpty {
-                EmptyTodayCard()
+                EmptyTodayCard(lastSession: calendarVM.sessions.filter { $0.endedAt != nil }.sorted { $0.scheduledDate > $1.scheduledDate }.first) {
+                    if let userId = authViewModel.currentUser?.id {
+                        Task {
+                            if let session = try? await calendarVM.createSession(on: Date(), planId: nil, userId: userId) {
+                                activeSession = session
+                                activePlanExercises = []
+                                showActiveSession = true
+                            }
+                        }
+                    }
+                }
             } else if let session = todaySessions.first {
                 TodaySessionCard(session: session) {
                     activeSession = session
@@ -76,28 +130,63 @@ struct HomeView: View {
 
                 HStack(spacing: 6) {
                     ForEach(DateHelper.weekDates(containing: Date()), id: \.self) { date in
+                        let daySessions = calendarVM.sessionsFor(date: date)
+                        let hasSession = !daySessions.isEmpty
+                        let isSelected = selectedWeekDay?.startOfDay == date.startOfDay
+
                         VStack(spacing: 6) {
                             Text(date.weekdaySymbol)
                                 .font(.system(size: 11, weight: .medium))
                                 .foregroundColor(.textSecondary)
-                            ZStack {
-                                Circle()
-                                    .fill(calendarVM.hasSession(on: date) ? Color.brand : Color.surfaceHigh)
-                                    .frame(width: 34, height: 34)
-                                if date.isToday {
-                                    Circle()
-                                        .stroke(Color.brand, lineWidth: 2)
-                                        .frame(width: 34, height: 34)
+
+                            Button {
+                                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                    selectedWeekDay = isSelected ? nil : (hasSession ? date : nil)
                                 }
-                                if calendarVM.hasSession(on: date) {
-                                    Image(systemName: "checkmark")
-                                        .font(.system(size: 12, weight: .bold))
-                                        .foregroundColor(.black)
+                            } label: {
+                                ZStack {
+                                    Circle()
+                                        .fill(hasSession ? Color.brand : Color.surfaceHigh)
+                                        .frame(width: 34, height: 34)
+                                    if date.isToday && !hasSession {
+                                        Circle()
+                                            .stroke(Color.brand, lineWidth: 2)
+                                            .frame(width: 34, height: 34)
+                                    }
+                                    if hasSession {
+                                        Image(systemName: "checkmark")
+                                            .font(.system(size: 12, weight: .bold))
+                                            .foregroundColor(.black)
+                                    }
                                 }
                             }
+                            .buttonStyle(.plain)
                         }
                         .frame(maxWidth: .infinity)
                     }
+                }
+
+                // Session name tooltip for selected day
+                if let selected = selectedWeekDay,
+                   let session = calendarVM.sessionsFor(date: selected).first {
+                    let label = session.notes.isEmpty ? "Workout" : session.notes
+                    HStack(spacing: 8) {
+                        Circle()
+                            .fill(Color.brand)
+                            .frame(width: 6, height: 6)
+                        Text(label)
+                            .font(.system(size: 13, weight: .medium))
+                            .foregroundColor(.textPrimary)
+                        Spacer()
+                        Text(selected, style: .date)
+                            .font(.system(size: 12))
+                            .foregroundColor(.textSecondary)
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .background(Color.surfaceHigh)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .transition(.opacity.combined(with: .move(edge: .top)))
                 }
             }
         }
@@ -125,6 +214,45 @@ struct HomeView: View {
         }
     }
 }
+
+// MARK: - Stat Pill
+
+struct StatPill: View {
+    let value: String
+    let label: String
+    let icon: String
+    let iconColor: Color
+
+    var body: some View {
+        HStack(spacing: 12) {
+            ZStack {
+                Circle()
+                    .fill(iconColor.opacity(0.15))
+                    .frame(width: 40, height: 40)
+                Image(systemName: icon)
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(iconColor)
+            }
+            VStack(alignment: .leading, spacing: 2) {
+                Text(value)
+                    .font(.system(size: 22, weight: .bold, design: .rounded))
+                    .foregroundColor(.textPrimary)
+                Text(label)
+                    .font(.system(size: 12))
+                    .foregroundColor(.textSecondary)
+            }
+            Spacer()
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .background(Color.surface)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.divider, lineWidth: 1))
+        .frame(maxWidth: .infinity)
+    }
+}
+
+// MARK: - Today Cards
 
 struct TodaySessionCard: View {
     let session: Session
@@ -163,30 +291,53 @@ struct TodaySessionCard: View {
 }
 
 struct EmptyTodayCard: View {
+    let lastSession: Session?
+    let onStart: () -> Void
+
     var body: some View {
         BrandCard {
-            HStack(spacing: 16) {
-                ZStack {
-                    Circle()
-                        .fill(Color.brand.opacity(0.12))
-                        .frame(width: 52, height: 52)
-                    Image(systemName: "calendar.badge.plus")
-                        .font(.system(size: 22))
-                        .foregroundColor(.brand)
+            VStack(alignment: .leading, spacing: 16) {
+                HStack(spacing: 16) {
+                    ZStack {
+                        Circle()
+                            .fill(Color.brand.opacity(0.12))
+                            .frame(width: 52, height: 52)
+                        Image(systemName: "figure.strengthtraining.traditional")
+                            .font(.system(size: 22))
+                            .foregroundColor(.brand)
+                    }
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Rest day")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(.textPrimary)
+                        Text("No session scheduled — start one when you're ready.")
+                            .font(.caption)
+                            .foregroundColor(.textSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
                 }
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("No session today")
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(.textPrimary)
-                    Text("Tap + to start a free workout")
-                        .font(.caption)
-                        .foregroundColor(.textSecondary)
+
+                if let last = lastSession {
+                    Divider().background(Color.divider)
+
+                    HStack {
+                        Image(systemName: "clock.arrow.circlepath")
+                            .font(.system(size: 13))
+                            .foregroundColor(.textSecondary)
+                        Text("Last workout: \(last.scheduledDate, style: .relative) ago")
+                            .font(.system(size: 13))
+                            .foregroundColor(.textSecondary)
+                        Spacer()
+                    }
                 }
-                Spacer()
+
+                BrandButton(title: "Start Free Workout", action: onStart)
             }
         }
     }
 }
+
+// MARK: - Quick Action Button
 
 struct QuickActionButton: View {
     let title: String
